@@ -18,8 +18,8 @@ BLACK = (0, 0, 0)
 WHITE = (255,255,255)
 skn = pygame.display.set_mode((480,600),0,32)
 rc = pygame.image.load(yc).convert_alpha()
-
-background = pygame.image.load('ChãoLava.png').convert()
+pygame.display.set_caption("Undertail")
+background = pygame.image.load('Chão dungeon.png').convert()
 background_rect = background.get_rect()
 #skn.fill(WHITE)
 running = True
@@ -35,7 +35,7 @@ try:
         y -= rc.get_height()/2
         
         skn.blit(background, background_rect)
-        
+        #skn.fill(BLACK(200,100,300,400))
         skn.blit(rc,(x,y))
         
         #pygame.display.update()
