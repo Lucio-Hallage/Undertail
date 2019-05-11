@@ -57,9 +57,9 @@ class Mob(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Sorteia um lugar inicial em x
-        self.rect.x = random.randrange(WIDTH - self.rect.width)
+        self.rect.x = random.randrange(100,200)
         # Sorteia um lugar inicial em y
-        self.rect.y = random.randrange(-100, -40)
+        self.rect.y = random.randrange(190, 200)
         # Sorteia uma velocidade inicial
         self.speedx = random.randrange(-3, 3)
         self.speedy = random.randrange(2, 9)
@@ -73,9 +73,9 @@ class Mob(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         
         # Se o meteoro passar do final da tela, volta para cima
-        if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
+        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
             self.rect.x = random.randrange(WIDTH - self.rect.width)
-            self.rect.y = random.randrange(-100, -40)
+            self.rect.y = random.randrange(190,200)
             self.speedx = random.randrange(-3, 3)
             self.speedy = random.randrange(2, 6)
             
@@ -99,7 +99,11 @@ player = Jogador()
 coracao = Coracao()
 all_sprites.add(coracao)
 #all_sprites,add(player)
-
+mobs = pygame.sprite.Group()
+for i in range(20):
+    m = Mob()
+    all_sprites.add(m)
+    mobs.add(m)  
 # Loop do jogo
 running = True
 while running:
@@ -127,11 +131,7 @@ while running:
     skn.blit(background, background_rect)
     skn.blit(background1,(72,192))
     #pygame.display.update()
-    mobs = pygame.sprite.Group()
-    for i in range(1):
-        m = Mob()
-        all_sprites.add(m)
-        mobs.add(m)          
+            
     all_sprites.draw(skn)
       #pygame.display.update()
     pygame.display.flip()
