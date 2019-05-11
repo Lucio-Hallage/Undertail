@@ -58,7 +58,7 @@ class Mob(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Sorteia um lugar inicial em x
-        self.rect.x = random.randrange(100,200)
+        self.rect.x = random.randrange(84,396)
         # Sorteia um lugar inicial em y
         self.rect.y = random.randrange(190, 200)
         # Sorteia uma velocidade inicial
