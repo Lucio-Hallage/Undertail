@@ -60,7 +60,7 @@ class Mob(pygame.sprite.Sprite):
         # Sorteia um lugar inicial em x
         self.rect.x = random.randrange(84,396)
         # Sorteia um lugar inicial em y
-        self.rect.y = random.randrange(190, 200)
+        self.rect.y = 204
         # Sorteia uma velocidade inicial
         self.speedx = random.randrange(-3, 3)
         self.speedy = random.randrange(6, 12)
@@ -75,9 +75,9 @@ class Mob(pygame.sprite.Sprite):
         
         # Se o meteoro passar do final da tela, volta para cima
         if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
-            self.rect.x = random.randrange(WIDTH - self.rect.width)
-            self.rect.y = random.randrange(190,200)
-            self.speedx = random.randrange(-3, 3)
+            self.rect.x = random.randrange(84,396)
+            self.rect.y = 204
+            self.speedx = 0
             self.speedy = random.randrange(6, 12)
             
 
@@ -101,7 +101,7 @@ coracao = Coracao()
 all_sprites.add(coracao)
 #all_sprites,add(player)
 mobs = pygame.sprite.Group()
-for i in range(20):
+for i in range(30):
     m = Mob()
     all_sprites.add(m)
     mobs.add(m)  
@@ -120,9 +120,9 @@ while running:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    skn.fill(VERMELHO)
+    
     mx,my = pygame.mouse.get_pos()
-    if not (mx<84 or mx>396 or my<204 or my>564):
+    if not (mx<90 or mx>392 or my<210 or my>560):
         print("entrou")          
         coracao.x = mx
         coracao.y = my
