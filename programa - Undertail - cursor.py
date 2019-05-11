@@ -8,6 +8,7 @@ WIDTH = 480
 HEIGHT = 600
 FPS = 30
 
+
 #determinar cores
 PRETO = (0,0,0)
 AMARELO = (244, 209, 66)
@@ -36,6 +37,42 @@ class Coracao(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.x-25
         self.rect.y = self.y-20
+class Chefe(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        chefe_img = pygame.image.load("venom.png").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(chefe_img, (105, 130))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(PRETO)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        self.rect.x = 240-52.5
+        self.rect.y = 192-125
+        self.speedx = 1
+        # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.x += self.speedx
+        
+        
+        # Se o meteoro passar do final da tela, volta para cima
+        if  self.rect.right > 396:
+                self.speedx=-1
+                print('boa')
+        if self.rect.left < 84:
+                self.speedx=1
+                print('iuuuhuuulllll')
+            
+            
 #Classe Mob que representa os meteoros
 class Mob(pygame.sprite.Sprite):
     
@@ -77,7 +114,7 @@ class Mob(pygame.sprite.Sprite):
         if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
             self.rect.x = random.randrange(84,396)
             self.rect.y = 204
-            self.speedx = 0
+            self.speedx = random.randrange(-3, 3)
             self.speedy = random.randrange(6, 12)
             
 
@@ -92,16 +129,22 @@ clock = pygame.time.Clock()
 skn = pygame.display.set_mode((480,600))
 background = pygame.image.load('ChãoLava.png').convert()
 background1 = pygame.image.load('Cursor.png').convert()
+#background2 = pygame.image.load('venom.png').convert()
 background_rect = background.get_rect()
 
 all_sprites = pygame.sprite.Group()
 player = Jogador()
 
+
+chefe = pygame.sprite.Group()
+all_sprites.add(Chefe())
+chefe.add(Chefe()) 
+
 coracao = Coracao()
 all_sprites.add(coracao)
 #all_sprites,add(player)
 mobs = pygame.sprite.Group()
-for i in range(30):
+for i in range(20):
     m = Mob()
     all_sprites.add(m)
     mobs.add(m)  
@@ -135,6 +178,8 @@ while running:
         
     skn.blit(background, background_rect)
     skn.blit(background1,(72,192))
+    #background2.fill(PRETO)
+    #skn.blit(background2,(72,192))
     #pygame.display.update()
             
     all_sprites.draw(skn)
