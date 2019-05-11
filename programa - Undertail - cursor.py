@@ -32,6 +32,7 @@ class Coracao(pygame.sprite.Sprite):
         self.rect.center = (WIDTH/2 , HEIGHT/2)
         self.x = 0
         self.y = 0
+        self.radius = 5
     def update(self):
         self.rect.x = self.x-25
         self.rect.y = self.y-20
@@ -45,10 +46,10 @@ class Mob(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        mob_img = pygame.image.load("Chão colorido.png").convert()
+        mob_img = pygame.image.load("luchalibre.png").convert()
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(mob_img, (50, 38))
+        self.image = pygame.transform.scale(mob_img, (24, 24))
         
         # Deixando transparente.
         self.image.set_colorkey(PRETO)
@@ -62,11 +63,11 @@ class Mob(pygame.sprite.Sprite):
         self.rect.y = random.randrange(190, 200)
         # Sorteia uma velocidade inicial
         self.speedx = random.randrange(-3, 3)
-        self.speedy = random.randrange(2, 9)
+        self.speedy = random.randrange(6, 12)
         
         # Melhora a colisão estabelecendo um raio de um circulo
-        self.radius = int(self.rect.width * .85 / 2)
-        
+        #self.radius = int(self.rect.width * .85 / 2)
+        self.radius=10
     # Metodo que atualiza a posição da navinha
     def update(self):
         self.rect.x += self.speedx
@@ -77,7 +78,7 @@ class Mob(pygame.sprite.Sprite):
             self.rect.x = random.randrange(WIDTH - self.rect.width)
             self.rect.y = random.randrange(190,200)
             self.speedx = random.randrange(-3, 3)
-            self.speedy = random.randrange(2, 6)
+            self.speedy = random.randrange(6, 12)
             
 
 # initialize pyagme and create window
@@ -127,6 +128,10 @@ while running:
         coracao.y = my
     else:
         print("fora") 
+    # Verifica se houve colisão entre nave e meteoro
+    hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
+    if hits:
+            running = False
         
     skn.blit(background, background_rect)
     skn.blit(background1,(72,192))
