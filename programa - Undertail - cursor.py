@@ -28,17 +28,18 @@ class Jogador(pygame.sprite.Sprite):
 class Coracao(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("coracao.png").convert_alpha()
+        cor_img = pygame.image.load("coracao.png").convert_alpha()
+        self.image = pygame.transform.scale(cor_img, (12,12))
         #image.fill(AMARELO)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2 , HEIGHT/2)
         self.x = 0
         self.y = 0
-        self.radius = 5
+        self.radius = 6
         pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
     def update(self):
-        self.rect.x = self.x-25
-        self.rect.y = self.y-20
+        self.rect.x = self.x-10
+        self.rect.y = self.y-10
 class Chefe(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -157,9 +158,9 @@ for i in range(10):
     all_sprites.add(m)
     mobs.add(m)  
 # Loop do jogo
+pygame.mixer.music.play(loops=-1)
 running = True
 while running:
-    pygame.mixer.music.play(loops=-1)
     clock.tick(FPS)
 
     for event in pygame.event.get():
