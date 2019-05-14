@@ -8,7 +8,7 @@ WIDTH = 480
 HEIGHT = 600
 FPS = 60
 
-
+c=0
 #determinar cores
 PRETO = (0,0,0)
 AMARELO = (244, 209, 66)
@@ -40,8 +40,8 @@ class Coracao(pygame.sprite.Sprite):
     def update(self):
         self.rect.x = self.x-10
         self.rect.y = self.y-10
+
 class Chefe(pygame.sprite.Sprite):
-    
     # Construtor da classe.
     def __init__(self):
         
@@ -74,11 +74,27 @@ class Chefe(pygame.sprite.Sprite):
         if self.rect.left < 84:
                 self.speedx=5
                 print('iuuuhuuulllll')
-            
+
+
+    
             
 #Classe Mob que representa os meteoros
 class Mob(pygame.sprite.Sprite):
-    
+
+def show_go_screen():
+    draw_text(screen, "MUAHAHAHA ADIÓS MUCHACHO!", 64, WIDTH/2 , HEIGHT/4)
+    draw_text(screen, "Mova o mouse para desviar dos ataques", 22, WIDTH/2 , HEIGHT/2)
+    draw_text(draw_text(screen, "Aperte a tecla para começar", 18, WIDTH/2 , HEIGHT*3/4)
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+    clock.tick(FPS)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.KEYUP:
+            waiting = False
+
     # Construtor da classe.
     def __init__(self):
         
@@ -120,6 +136,8 @@ class Mob(pygame.sprite.Sprite):
             self.rect.y = 204
             self.speedx = random.randrange(-3, 3)
             self.speedy = random.randrange(3, 6)
+
+
             
 
 # initialize pygame and create window
@@ -137,22 +155,18 @@ background = pygame.image.load('Chãolava.png').convert()
 background1 = pygame.image.load('Cursor.png').convert()
 #background2 = pygame.image.load('venom.png').convert()
 background_rect = background.get_rect()
-gameover=True
-all_sprites = pygame.sprite.Group()
-coracao = Coracao()
-all_sprites.add(coracao)
+#gameover=True
+
+
 #while gameover:
     #clock.tick(FPS)
     #mx,my = pygame.mouse.get_pos()
     #if not (mx<90 or mx>392 or my<210 or my>560):
         #gameover=False
 
-chefe = pygame.sprite.Group()
-all_sprites.add(Chefe())
-chefe.add(Chefe())  
 
 #all_sprites.add(player)
-mobs = pygame.sprite.Group()
+
 for i in range(10):
     m = Mob()
     all_sprites.add(m)
@@ -160,19 +174,36 @@ for i in range(10):
 # Loop do jogo
 pygame.mixer.music.play(loops=-1)
 running = True
+game_over = True
+c=0
 while running:
+    if game_over:
+        show_go_screen()
+        game_over = False
+        mobs = pygame.sprite.Group()
+        chefe = pygame.sprite.Group()
+        all_sprites = pygame.sprite.Group()
+        coracao = Coracao()
+        all_sprites.add(coracao)
+        all_sprites.add(Chefe())
+        chefe.add(Chefe())  
+
     clock.tick(FPS)
 
     for event in pygame.event.get():
         #check for closing window
         if event.type == pygame.QUIT:
-            running = False
+            running = True
 
     #cursor coração
+    #for event in pygame.event.get():
+     #   if event.type == QUIT:                           #TO TENTANDO COLOCAR GAME OVER
+      #      pygame.quit()
+       #     sys.exit()
+    
     for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+        if event.type == pygame.QUIT:
+            game_over = True
     
     mx,my = pygame.mouse.get_pos()
     if not (mx<90 or mx>392 or my<210 or my>560):
@@ -183,7 +214,7 @@ while running:
     # Verifica se houve colisão entre nave e meteoro
     hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
     if hits:
-            running = False
+            game_over = True
         
     skn.blit(background, background_rect)
     skn.blit(background1,(72,192))
@@ -196,9 +227,11 @@ while running:
     pygame.display.flip()
     #updates
     all_sprites.update()
+    if c==600:
+        running=False
 
     #gráficos/desenhos
-    
+    c+=1
     all_sprites.draw(skn)
     # depois de desenhar tudo 
     
