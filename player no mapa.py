@@ -8,7 +8,7 @@ screenWidth = 500
 #walkRight = [pygame.image.load("")] 
 #walkLeft = [pygame.image.load("")]
 bg = pygame.image.load("mapagame.png")
-char = pygame.image.load("sonic.png")
+#char = pygame.image.load("")
 
 x = 50
 y = 425
