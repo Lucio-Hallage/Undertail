@@ -22,6 +22,7 @@ AMARELO = (244, 209, 66)
 VERMELHO = (255, 0, 0)
 BRANCO=(255,255,255)
 VERDE = (0, 255, 0)
+AZUL=(0,0,255)
 
 # definindo os personagens
 
@@ -147,7 +148,7 @@ def init_screen(screen):
     # Carrega o fundo da tela inicial
     background1 = pygame.image.load('Cursor.png').convert()
     text_surface = score_font.render("FASE 2" , True, PRETO)
-    text_surface2 = score_font.render("SONIC" , True, PRETO)
+    text_surface2 = score_font.render("SONIC" , True, AZUL)
     text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
     text_surface1= pygame.transform.scale(text_surface3, (460, 40))
     running = True
