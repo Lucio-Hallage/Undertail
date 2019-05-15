@@ -146,9 +146,10 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     background1 = pygame.image.load('Cursor.png').convert()
-    inicio=pygame.image.load('inicio.png').convert()
-    background2=pygame.transform.scale(inicio, (320, 350))
-    background2.set_colorkey(PRETO)
+    text_surface = score_font.render("FASE 2" , True, PRETO)
+    text_surface2 = score_font.render("SONIC" , True, PRETO)
+    text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
+    text_surface1= pygame.transform.scale(text_surface3, (460, 40))
     running = True
     while running:
         
@@ -168,9 +169,11 @@ def init_screen(screen):
                 coracao.x = mx
                 coracao.y = my    
         # A cada loop, redesenha o fundo e os sprites
-        screen.fill(VERMELHO)
+        screen.fill(VERDE)
         screen.blit(background1,(72,192))
-        screen.blit(background2,(80,-20))
+        screen.blit(text_surface,(80,30))
+        screen.blit(text_surface2,(260,  70))
+        screen.blit(text_surface1,(10,150))
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
@@ -221,6 +224,7 @@ background = pygame.image.load('Chão dungeon.png').convert()
 background1 = pygame.image.load('Cursor.png').convert()
 #background2 = pygame.image.load('venom.png').convert()
 background_rect = background.get_rect()
+score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 
 all_sprites = pygame.sprite.Group()
@@ -236,7 +240,7 @@ all_sprites = pygame.sprite.Group()
      #   gameover=False
 coracao = Coracao()
 all_sprites.add(coracao)
-#init_screen(skn)
+init_screen(skn)
 chefe = pygame.sprite.Group()
 all_sprites.add(Chefe())
 chefe.add(Chefe())  
@@ -249,7 +253,7 @@ for i in range(10):
     mobs.add(m)
     
 c = 60
-score_font=pygame.font.Font("PressStart2P.ttf", 28)
+
 # Loop do jogo
 pygame.mixer.music.play(loops=-1)
 running = True
