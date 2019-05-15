@@ -8,13 +8,22 @@ screenWidth = 500
 #walkRight = [pygame.image.load("")] 
 #walkLeft = [pygame.image.load("")]
 bg = pygame.image.load("mapagame.png")
-#char = pygame.image.load("")
+char = pygame.image.load("sonic.png")
 
 x = 50
 y = 425
-width = 40
-height = 60
+width = 64
+height = 64
 vel = 30
+
+def redrawGameWindow():
+    win.blit(bg, (0, 0))
+    win.fill((0,0,0))
+    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+    pygame.display.update()       
+    
+
+
 
 run = True
 while run:
@@ -35,8 +44,9 @@ while run:
         y += vel
     win.fill((0,0,0))
     pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
-    pygame.display.update()       
-            
+    pygame.display.update()      
+    
+    redrawGameWindow()        
             
             
             
