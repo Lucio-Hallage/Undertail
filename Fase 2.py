@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 14 16:24:20 2019
+Created on Tue May 14 22:09:11 2019
 
 @author: insper
 """
-
-#programa do cursor
+#FASE2-sonic
 import pygame,sys
 from pygame.locals import *
 import random
@@ -21,7 +20,8 @@ inventario=[]
 PRETO = (0,0,0)
 AMARELO = (244, 209, 66)
 VERMELHO = (255, 0, 0)
-
+BRANCO=(255,255,255)
+VERDE = (0, 255, 0)
 
 # definindo os personagens
 
@@ -56,13 +56,13 @@ class Chefe(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        chefe_img = pygame.image.load("venom.png").convert()
+        chefe_img = pygame.image.load("sonic.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(chefe_img, (105, 130))
         
         # Deixando transparente.
-        self.image.set_colorkey(PRETO)
+        self.image.set_colorkey(VERDE)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -121,7 +121,18 @@ class Mob(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        
+        if self.rect.y>450:
+            self.speedx-=0.1
+        if self.rect.y>400:
+            self.speedx+=0.1
+        if self.rect.y>350:
+            self.speedx-=0.1
+        if self.rect.y>300:
+            self.speedx+=0.1
+        if self.rect.y>250:
+            self.speedx-=0.1
+        if self.rect.y>200:
+            self.speedx+=0.1
         # Se o meteoro passar do final da tela, volta para cima
         if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
             self.rect.x = random.randrange(84,396)
@@ -179,7 +190,8 @@ def end_screen(skn):
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
-                
+                pygame.quit()
+                sys.exit()
                 running = False
 
             if event.type == pygame.KEYUP:
@@ -203,9 +215,9 @@ pygame.display.set_caption("Undertail")
 clock = pygame.time.Clock()
 
 skn = pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.mixer.music.load('naruto.mpeg')
+pygame.mixer.music.load('naruto2.mpeg')
 pygame.mixer.music.set_volume(2)
-background = pygame.image.load('Chãolava.png').convert()
+background = pygame.image.load('Chão dungeon.png').convert()
 background1 = pygame.image.load('Cursor.png').convert()
 #background2 = pygame.image.load('venom.png').convert()
 background_rect = background.get_rect()
@@ -224,7 +236,7 @@ all_sprites = pygame.sprite.Group()
      #   gameover=False
 coracao = Coracao()
 all_sprites.add(coracao)
-init_screen(skn)
+#init_screen(skn)
 chefe = pygame.sprite.Group()
 all_sprites.add(Chefe())
 chefe.add(Chefe())  
@@ -253,12 +265,10 @@ try:
             #check for closing window
             if event.type == pygame.QUIT:
                 running = False
-        
-        #cursor coração
-        for event in pygame.event.get():
-            if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+        
+        #cursor coração
         
         mx,my = pygame.mouse.get_pos()
         if not (mx<90 or mx>392 or my<210 or my>560):
@@ -294,7 +304,7 @@ try:
       
         
         # depois de desenhar tudo
-    #chefe.kill()
+    #all_sprites.kill(chefe)
     end_screen(skn)   
 finally:     
         pygame.quit()
