@@ -125,7 +125,7 @@ def show_go_screen():
     draw_text(screen, "MUAHAHAHA ADIÓS MUCHACHO!", 64, WIDTH/2 , HEIGHT/4)
     draw_text(screen, "Mova o mouse para desviar dos ataques", 22, WIDTH/2 , HEIGHT/2)
     draw_text(screen, "Aperte a tecla para começar", 18, WIDTH/2 , HEIGHT*3/4)
-    pygame.display.flip()
+    
     waiting = True
     while waiting:
         clock.tick(FPS)
@@ -134,7 +134,7 @@ def show_go_screen():
             pygame.quit()
         if event.type == pygame.KEYUP:
             waiting = False
-            
+    pygame.display.flip()       
 
 # initialize pygame and create window
 pygame.init()
