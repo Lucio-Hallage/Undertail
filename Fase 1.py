@@ -295,6 +295,9 @@ try:
         
         # depois de desenhar tudo
     #chefe.kill()
+    
+    for mobs in all_sprites:
+        mobs.kill()
     end_screen(skn)   
 finally:     
         pygame.quit()

@@ -310,6 +310,8 @@ try:
         
         # depois de desenhar tudo
     #all_sprites.kill(chefe)
+    for mobs in all_sprites:
+        mobs.kill()
     end_screen(skn)   
 finally:     
         pygame.quit()
