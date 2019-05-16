@@ -262,7 +262,7 @@ try:
             all_sprites.add(m)
             mobs.add(m)
             
-        c = 0
+        c = 60
         
         # Loop do jogo
         pygame.mixer.music.play(loops=-1)
