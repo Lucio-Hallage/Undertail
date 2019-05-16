@@ -219,7 +219,7 @@ def end_screen(skn,c,t):
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-        return t
+    return t
 
         
         
@@ -238,7 +238,6 @@ background1 = pygame.image.load('Cursor.png').convert()
 background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
-c = 60
 t=0
 try:
     while gameover:
@@ -278,14 +277,8 @@ try:
                     running = False
                     gameover=False
             
-            #cursor coração
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-            
             mx,my = pygame.mouse.get_pos()
-            if not (mx<90 or mx>392 or my<210 or my>560):
+            if not (mx<95 or mx>392 or my<210 or my>560):
                          
                 coracao.x = mx
                 coracao.y = my
@@ -323,64 +316,5 @@ try:
         for mobs in all_sprites:
             mobs.kill()
         t=end_screen(skn,60-c,t)      
-finally:     
-        pygame.quit()
-# Loop do jogo
-
-try:
-    while running:
-        clock.tick(FPS)
-        c -=1/60
-        if c <= 0:
-            running = False
-            inventario.append('Fase 1')
-        
-        for event in pygame.event.get():
-            #check for closing window
-            if event.type == pygame.QUIT:
-                running = False
-                pygame.quit()
-                sys.exit()
-        
-        #cursor coração
-        
-        mx,my = pygame.mouse.get_pos()
-        if not (mx<90 or mx>392 or my<210 or my>560):
-                     
-            coracao.x = mx
-            coracao.y = my
-        
-        # Verifica se houve colisão entre nave e meteoro
-        hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
-        if hits:
-                running = False
-                time.sleep(1)
-                
-                
-            
-        skn.blit(background, background_rect)
-        skn.blit(background1,(72,192))
-        text_surface = score_font.render("Sobreviva Por" , True, PRETO)
-        text_surface2 = score_font.render(" {0} Segundos".format(int(c)), True, PRETO)
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (WIDTH / 2,  10)
-        skn.blit(text_surface, text_rect)
-        skn.blit(text_surface2, (70,  50))
-                
-        all_sprites.draw(skn)
-          #pygame.display.update()
-        pygame.display.flip()
-        #updates
-        all_sprites.update()
-        
-        
-        #gráficos/desenhos
-      
-        
-        # depois de desenhar tudo
-    #all_sprites.kill(chefe)
-    for mobs in all_sprites:
-        mobs.kill()
-    t=end_screen(skn,60-c,t)   
 finally:     
         pygame.quit()

@@ -165,7 +165,7 @@ def init_screen(screen):
                 sys.exit()
                 running = False
             mx,my = pygame.mouse.get_pos()
-            if not (mx<90 or mx>392 or my<210 or my>560):
+            if not (mx<95 or mx>392 or my<210 or my>560):
                 running=False
                 coracao.x = mx
                 coracao.y = my    
@@ -240,7 +240,7 @@ background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 
-c = 60
+
 t=0
 # Loop do jogo
 pygame.mixer.music.play(loops=-1)
@@ -282,12 +282,6 @@ try:
                 if event.type == pygame.QUIT:
                     running = False
                     gameover=False
-            
-            #cursor coração
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
             
             mx,my = pygame.mouse.get_pos()
             if not (mx<90 or mx>392 or my<210 or my>560):

@@ -265,14 +265,8 @@ try:
                     running = False
                     gameover=False
             
-            #cursor coração
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-            
             mx,my = pygame.mouse.get_pos()
-            if not (mx<90 or mx>392 or my<210 or my>560):
+            if not (mx<95 or mx>392 or my<210 or my>560):
                          
                 coracao.x = mx
                 coracao.y = my
