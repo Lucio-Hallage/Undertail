@@ -63,7 +63,7 @@ class Chefe(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(chefe_img, (105, 130))
         
         # Deixando transparente.
-        self.image.set_colorkey(VERDE)
+        self.image.set_colorkey((88,88,88))
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -182,7 +182,7 @@ def init_screen(screen):
 def end_screen(skn,c,t):
     if c>t:
         t=c
-    if 'Fase 1' not in inventario:
+    if 'Fase2' not in inventario:
         text_surface = score_font.render("Você Perdeu" , True, PRETO)
         text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
         text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
@@ -240,7 +240,7 @@ score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 t=0
 try:
-    while gameover:
+    while 'Fase2' not in inventario:
         
         all_sprites = pygame.sprite.Group()
         coracao = Coracao()
@@ -268,8 +268,8 @@ try:
             c -=1/60
             if c <= 0:
                 running = False
-                inventario.append('Fase 1')
-                gameover=False
+                inventario.append('Fase2')
+                
             
             for event in pygame.event.get():
                 #check for closing window
@@ -286,7 +286,7 @@ try:
             # Verifica se houve colisão entre nave e meteoro
             hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
             if hits:
-                    running = False
+                    running = True
                     time.sleep(1)
                     
                     
