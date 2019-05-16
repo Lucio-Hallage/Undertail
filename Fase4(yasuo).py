@@ -57,13 +57,13 @@ class Chefe(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        chefe_img = pygame.image.load("yasuo.png").convert()
+        chefe_img = pygame.image.load("yasuo1.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(chefe_img, (105, 130))
         
         # Deixando transparente.
-        self.image.set_colorkey(VERDE)
+        self.image.set_colorkey((137,164,125))
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -147,7 +147,7 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     background1 = pygame.image.load('Cursor.png').convert()
-    text_surface = score_font.render("FASE 4" , True, PRETO)
+    text_surface = score_font.render("FASE 4:X1" , True, PRETO)
     text_surface2 = score_font.render("Yasuo" , True, AZUL)
     text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
     text_surface1= pygame.transform.scale(text_surface3, (460, 40))
@@ -233,7 +233,7 @@ clock = pygame.time.Clock()
 skn = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.mixer.music.load('naruto2.mpeg')
 pygame.mixer.music.set_volume(2)
-background = pygame.image.load('Chão dungeon.png').convert()
+background = pygame.image.load('yasuobg.jpg').convert()
 background1 = pygame.image.load('Cursor.png').convert()
 #background2 = pygame.image.load('venom.png').convert()
 background_rect = background.get_rect()
@@ -243,8 +243,6 @@ gameover=True
 
 t=0
 # Loop do jogo
-pygame.mixer.music.play(loops=-1)
-running = True
 try:
     while gameover:
         
