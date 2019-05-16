@@ -168,7 +168,7 @@ def init_screen(screen):
 def end_screen(skn,c,t):
     if c>t:
         t=c
-    if 'Fase 1' not in inventario:
+    if 'Fase1' not in inventario:
         text_surface = score_font.render("Você Perdeu" , True, PRETO)
         text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
         text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
@@ -198,10 +198,11 @@ def end_screen(skn,c,t):
         # A cada loop, redesenha o fundo e os sprites
         skn.fill(AMARELO)
         skn.blit(text_surface,(72,192))
-        skn.blit(text_surface1,(10,252))
-        skn.blit(text_surface3,(10,302))
-        skn.blit(text_surface2,(10,362))
-        skn.blit(text_surface4,(10,412))
+        if 'Fase1' not in inventario:
+            skn.blit(text_surface1,(10,252))
+            skn.blit(text_surface3,(10,302))
+            skn.blit(text_surface2,(10,362))
+            skn.blit(text_surface4,(10,412))
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
@@ -245,7 +246,7 @@ try:
             all_sprites.add(m)
             mobs.add(m)
             
-        c = 60
+        c = 0
         
         # Loop do jogo
         pygame.mixer.music.play(loops=-1)
@@ -256,7 +257,7 @@ try:
             c -=1/60
             if c <= 0:
                 running = False
-                inventario.append('Fase 1')
+                inventario.append('Fase1')
                 gameover=False
             
             for event in pygame.event.get():

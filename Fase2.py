@@ -179,7 +179,9 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         all_sprites.update()
+
 def end_screen(skn,c,t,inventario):
+    print(inventario)
     if c>t:
         t=c
     if 'Fase2' not in inventario:
@@ -212,10 +214,11 @@ def end_screen(skn,c,t,inventario):
         # A cada loop, redesenha o fundo e os sprites
         skn.fill(AMARELO)
         skn.blit(text_surface,(72,192))
-        skn.blit(text_surface1,(10,252))
-        skn.blit(text_surface3,(10,302))
-        skn.blit(text_surface2,(10,362))
-        skn.blit(text_surface4,(10,412))
+        if 'Fase2' not in inventario:
+            skn.blit(text_surface1,(10,252))
+            skn.blit(text_surface3,(10,302))
+            skn.blit(text_surface2,(10,362))
+            skn.blit(text_surface4,(10,412))
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
@@ -315,6 +318,6 @@ try:
         
         for mobs in all_sprites:
             mobs.kill()
-        t=end_screen(skn,60-c,inventario)      
+        t=end_screen(skn,60-c,t,inventario)      
 finally:     
         pygame.quit()

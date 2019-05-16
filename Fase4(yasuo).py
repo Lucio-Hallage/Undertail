@@ -179,10 +179,10 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         all_sprites.update()
-def end_screen(skn,c,t):
+def end_screen(skn,c,t,inventario):
     if c>t:
         t=c
-    if 'Fase 1' not in inventario:
+    if 'Fase4' not in inventario:
         text_surface = score_font.render("Você Perdeu" , True, PRETO)
         text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
         text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
@@ -212,10 +212,11 @@ def end_screen(skn,c,t):
         # A cada loop, redesenha o fundo e os sprites
         skn.fill(AMARELO)
         skn.blit(text_surface,(72,192))
-        skn.blit(text_surface1,(10,252))
-        skn.blit(text_surface3,(10,302))
-        skn.blit(text_surface2,(10,362))
-        skn.blit(text_surface4,(10,412))
+        if 'Fase4' not in inventario:
+            skn.blit(text_surface1,(10,252))
+            skn.blit(text_surface3,(10,302))
+            skn.blit(text_surface2,(10,362))
+            skn.blit(text_surface4,(10,412))
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
@@ -244,7 +245,7 @@ gameover=True
 t=0
 # Loop do jogo
 try:
-    while gameover:
+    while 'Fase4' not in inventario:
         
         all_sprites = pygame.sprite.Group()
         coracao = Coracao()
@@ -261,7 +262,7 @@ try:
             all_sprites.add(m)
             mobs.add(m)
             
-        c = 60
+        c = 0
         
         # Loop do jogo
         pygame.mixer.music.play(loops=-1)
@@ -272,7 +273,7 @@ try:
             c -=1/60
             if c <= 0:
                 running = False
-                inventario.append('Fase 1')
+                inventario.append('Fase4')
                 gameover=False
             
             for event in pygame.event.get():
@@ -319,6 +320,6 @@ try:
         
         for mobs in all_sprites:
             mobs.kill()
-        t=end_screen(skn,60-c,t)      
+        t=end_screen(skn,60-c,t,inventario)      
 finally:     
         pygame.quit()
