@@ -179,7 +179,7 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         all_sprites.update()
-def end_screen(skn,c,t):
+def end_screen(skn,c,t,inventario):
     if c>t:
         t=c
     if 'Fase2' not in inventario:
@@ -286,7 +286,7 @@ try:
             # Verifica se houve colisão entre nave e meteoro
             hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
             if hits:
-                    running = True
+                    running = False
                     time.sleep(1)
                     
                     
@@ -315,6 +315,6 @@ try:
         
         for mobs in all_sprites:
             mobs.kill()
-        t=end_screen(skn,60-c,t)      
+        t=end_screen(skn,60-c,inventario)      
 finally:     
         pygame.quit()
