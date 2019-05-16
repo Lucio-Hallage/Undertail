@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 14 22:09:11 2019
+Created on Wed May 15 18:12:39 2019
 
 @author: insper
 """
-#FASE2-sonic
+#FASE YASUO
 import pygame,sys
 from pygame.locals import *
 import random
@@ -57,7 +57,7 @@ class Chefe(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        chefe_img = pygame.image.load("sonic.png").convert()
+        chefe_img = pygame.image.load("yasuo.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(chefe_img, (105, 130))
@@ -94,7 +94,7 @@ class Mob(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        mob_img = pygame.image.load("sonic rings.png").convert()
+        mob_img = pygame.image.load("luchalibre.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(mob_img, (24, 24))
@@ -147,8 +147,8 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     background1 = pygame.image.load('Cursor.png').convert()
-    text_surface = score_font.render("FASE 2" , True, PRETO)
-    text_surface2 = score_font.render("SONIC" , True, AZUL)
+    text_surface = score_font.render("FASE 4" , True, PRETO)
+    text_surface2 = score_font.render("Yasuo" , True, AZUL)
     text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
     text_surface1= pygame.transform.scale(text_surface3, (460, 40))
     running = True
@@ -184,8 +184,11 @@ def end_screen(skn,c,t):
         t=c
     if 'Fase 1' not in inventario:
         text_surface = score_font.render("Você Perdeu" , True, PRETO)
-        text_surface1 = score_font.render("Pontuação Atual:{0} segundos".format(c) , True, PRETO)
-        text_surface2 = score_font.render("Recorde Atual:{0} segundos".format(t) , True, PRETO)
+        text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
+        text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
+        text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
+        text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, PRETO)
+        
     else:
         text_surface = score_font.render("Você Ganhou" , True, PRETO)
     running = True
@@ -209,15 +212,18 @@ def end_screen(skn,c,t):
         # A cada loop, redesenha o fundo e os sprites
         skn.fill(AMARELO)
         skn.blit(text_surface,(72,192))
-        skn.blit(text_surface1,(72,252))
-        skn.blit(text_surface2,(72,312))
+        skn.blit(text_surface1,(10,252))
+        skn.blit(text_surface3,(10,302))
+        skn.blit(text_surface2,(10,362))
+        skn.blit(text_surface4,(10,412))
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-        return t
+    return t
 
         
         
+
 # initialize pygame and create window
 pygame.init()
 pygame.mixer.init()
@@ -234,90 +240,93 @@ background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 
-all_sprites = pygame.sprite.Group()
-
-#while gameover:
- #   clock.tick(FPS)
-  #  mx,my = pygame.mouse.get_pos()
-   # all_sprites.draw(skn)
-   # skn.blit(background, background_rect)
-    #skn.blit(background1,(72,192)) 
-    #pygame.display.flip()
-    #if not (mx<90 or mx>392 or my<210 or my>560):
-     #   gameover=False
-coracao = Coracao()
-all_sprites.add(coracao)
-init_screen(skn)
-chefe = pygame.sprite.Group()
-all_sprites.add(Chefe())
-chefe.add(Chefe())  
-
-#all_sprites.add(player)
-mobs = pygame.sprite.Group()
-for i in range(10):
-    m = Mob()
-    all_sprites.add(m)
-    mobs.add(m)
-    
 c = 60
-
+t=0
 # Loop do jogo
 pygame.mixer.music.play(loops=-1)
 running = True
 try:
-    while running:
-        clock.tick(FPS)
-        c -=1/60
-        if c <= 0:
-            running = False
-            inventario.append('Fase 1')
+    while gameover:
         
-        for event in pygame.event.get():
-            #check for closing window
-            if event.type == pygame.QUIT:
-                running = False
-                pygame.quit()
-                sys.exit()
+        all_sprites = pygame.sprite.Group()
+        coracao = Coracao()
+        all_sprites.add(coracao)
+        init_screen(skn)
+        chefe = pygame.sprite.Group()
+        all_sprites.add(Chefe())
+        chefe.add(Chefe())  
         
-        #cursor coração
-        
-        mx,my = pygame.mouse.get_pos()
-        if not (mx<90 or mx>392 or my<210 or my>560):
-                     
-            coracao.x = mx
-            coracao.y = my
-        
-        # Verifica se houve colisão entre nave e meteoro
-        hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
-        if hits:
-                running = False
-                time.sleep(1)
-                
-                
+        #all_sprites.add(player)
+        mobs = pygame.sprite.Group()
+        for i in range(10):
+            m = Mob()
+            all_sprites.add(m)
+            mobs.add(m)
             
-        skn.blit(background, background_rect)
-        skn.blit(background1,(72,192))
-        text_surface = score_font.render("Sobreviva Por" , True, PRETO)
-        text_surface2 = score_font.render(" {0} Segundos".format(int(c)), True, PRETO)
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (WIDTH / 2,  10)
-        skn.blit(text_surface, text_rect)
-        skn.blit(text_surface2, (70,  50))
+        c = 60
+        
+        # Loop do jogo
+        pygame.mixer.music.play(loops=-1)
+        running = True
+        
+        while running:
+            clock.tick(FPS)
+            c -=1/60
+            if c <= 0:
+                running = False
+                inventario.append('Fase 1')
+                gameover=False
+            
+            for event in pygame.event.get():
+                #check for closing window
+                if event.type == pygame.QUIT:
+                    running = False
+                    gameover=False
+            
+            #cursor coração
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            
+            mx,my = pygame.mouse.get_pos()
+            if not (mx<90 or mx>392 or my<210 or my>560):
+                         
+                coracao.x = mx
+                coracao.y = my
+            
+            # Verifica se houve colisão entre nave e meteoro
+            hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
+            if hits:
+                    running = False
+                    time.sleep(1)
+                    
+                    
                 
-        all_sprites.draw(skn)
-          #pygame.display.update()
-        pygame.display.flip()
-        #updates
-        all_sprites.update()
+            skn.blit(background, background_rect)
+            skn.blit(background1,(72,192))
+            text_surface = score_font.render("Sobreviva Por" , True, BRANCO)
+            text_surface2 = score_font.render(" {0} Segundos".format(int(c)), True, BRANCO)
+            text_rect = text_surface.get_rect()
+            text_rect.midtop = (WIDTH / 2,  10)
+            skn.blit(text_surface, text_rect)
+            skn.blit(text_surface2, (70,  50))
+                    
+            all_sprites.draw(skn)
+              #pygame.display.update()
+            pygame.display.flip()
+            #updates
+            all_sprites.update()
+            
+            
+            #gráficos/desenhos
+          
+            
+            # depois de desenhar tudo
+        #chefe.kill()
         
-        
-        #gráficos/desenhos
-      
-        
-        # depois de desenhar tudo
-    #all_sprites.kill(chefe)
-    for mobs in all_sprites:
-        mobs.kill()
-    t=end_screen(skn,60-c,t)   
+        for mobs in all_sprites:
+            mobs.kill()
+        t=end_screen(skn,60-c,t)      
 finally:     
         pygame.quit()
