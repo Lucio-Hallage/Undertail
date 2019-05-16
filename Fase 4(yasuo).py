@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May 14 22:09:11 2019
+Created on Wed May 15 18:12:39 2019
 
 @author: insper
 """
-#FASE2-sonic
+#FASE YASUO
 import pygame,sys
 from pygame.locals import *
 import random
@@ -57,7 +57,7 @@ class Chefe(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        chefe_img = pygame.image.load("sonic.png").convert()
+        chefe_img = pygame.image.load("yasuo.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(chefe_img, (105, 130))
@@ -179,13 +179,9 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         all_sprites.update()
-def end_screen(skn,c,t):
-    if c>t:
-        t=c
+def end_screen(skn):
     if 'Fase 1' not in inventario:
         text_surface = score_font.render("Você Perdeu" , True, PRETO)
-        text_surface1 = score_font.render("Pontuação Atual:{0} segundos".format(c) , True, PRETO)
-        text_surface2 = score_font.render("Recorde Atual:{0} segundos".format(t) , True, PRETO)
     else:
         text_surface = score_font.render("Você Ganhou" , True, PRETO)
     running = True
@@ -209,15 +205,13 @@ def end_screen(skn,c,t):
         # A cada loop, redesenha o fundo e os sprites
         skn.fill(AMARELO)
         skn.blit(text_surface,(72,192))
-        skn.blit(text_surface1,(72,252))
-        skn.blit(text_surface2,(72,312))
         all_sprites.draw(skn)
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-        return t
 
         
         
+
 # initialize pygame and create window
 pygame.init()
 pygame.mixer.init()
@@ -318,6 +312,6 @@ try:
     #all_sprites.kill(chefe)
     for mobs in all_sprites:
         mobs.kill()
-    t=end_screen(skn,60-c,t)   
+    end_screen(skn)   
 finally:     
         pygame.quit()
