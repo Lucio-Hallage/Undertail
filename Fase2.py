@@ -122,23 +122,17 @@ class Mob(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        if self.rect.y>450:
+        mx,my = pygame.mouse.get_pos()
+        if mx<self.rect.x:
             self.speedx-=0.1
-        if self.rect.y>400:
-            self.speedx+=0.1
-        if self.rect.y>350:
-            self.speedx-=0.1
-        if self.rect.y>300:
-            self.speedx+=0.1
-        if self.rect.y>250:
-            self.speedx-=0.1
-        if self.rect.y>200:
-            self.speedx+=0.1
+        if mx>self.rect.x:
+            self.speedx+=0.1     
+                
         # Se o meteoro passar do final da tela, volta para cima
         if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
             self.rect.x = random.randrange(84,396)
             self.rect.y = 204
-            self.speedx = random.randrange(-3, 3)
+            self.speedx = 0
             self.speedy = random.randrange(3, 6)
             
 def init_screen(screen):
@@ -256,7 +250,7 @@ try:
         
         #all_sprites.add(player)
         mobs = pygame.sprite.Group()
-        for i in range(10):
+        for i in range(5):
             m = Mob()
             all_sprites.add(m)
             mobs.add(m)
