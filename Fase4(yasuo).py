@@ -241,7 +241,7 @@ background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 
-
+pygame.mixer.music.play(loops=-1)
 t=0
 # Loop do jogo
 try:
@@ -265,7 +265,7 @@ try:
         c = 60
         
         # Loop do jogo
-        pygame.mixer.music.play(loops=-1)
+        
         running = True
         
         while running:

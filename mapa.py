@@ -5,16 +5,12 @@ import random
 import time
 pygame.init()
 
-win= pygame.display.set_mode((500,500))
-screenWidth = 500
-FPS=60
-clock = pygame.time.Clock()
 
-#walkRight = [pygame.image.load("")] 
-#walkLeft = [pygame.image.load("")]
-bg = pygame.image.load("mapagame.png")
-bg1 = pygame.transform.scale(bg, (900, 500))
-#char = pygame.image.load("")
+FPS=60
+WIDTH=1440
+HEIGHT=810
+skn= pygame.display.set_mode((WIDTH,HEIGHT)) 
+
 
 class jogador(pygame.sprite.Sprite):
     
@@ -37,44 +33,62 @@ class jogador(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.x=20
-        self.rect.y=20
-        self.speedy = 0
-        self.speedx = 0
+        self.rect.x=0
+        self.rect.y=HEIGHT-200
+        self.speedy =0
+        self.speedx =0
     # Metodo que atualiza a posição da navinha
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        # Mantem dentro da tela
-               
+        if self.rect.x > WIDTH-100:
+            self.rect.x = WIDTH-100
+        if self.rect.x < 0:
+            self.rect.x = 0
+        if self.rect.y < 250:
+            self.rect.y=250
+        if self.rect.y > HEIGHT-200:
+            self.rect.y= HEIGHT-200
+            
+        
+        if not (self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396):
+            print('fase1')
     
 class bgc(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        bg = pygame.image.load("mapagame.png")
-        self.image = pygame.transform.scale(bg, (900, 500))
+        bg = pygame.image.load("mapagame.png").convert()
+        self.image = pygame.transform.scale(bg, (WIDTH,HEIGHT))
        
         self.rect = self.image.get_rect()
+        self.rect.x=0
+        self.rect.y=0
+        self.speedx=0
+        
+    def uptade(self):
+        self.rect.x += self.speedx
+        
+        
+    
      
     
 clock = pygame.time.Clock()
 
-bg = pygame.image.load("mapagame.png")
-bg1 = pygame.transform.scale(bg, (900, 500)) 
-bg1_rect = bg1.get_rect()      
-run = True
 pygame.init()
 pygame.mixer.init()
 all_sprites = pygame.sprite.Group()
+#mapa= pygame.sprite.Group()
+backg = bgc()
+all_sprites.add(backg)
+#mapa.add(backg)
+
 player = jogador()
-link= pygame.sprite.Group()
+#link= pygame.sprite.Group()
 all_sprites.add(player)
-link.add(player)
-mapa= pygame.sprite.Group()
-all_sprites.add(bgc())
-mapa.add(bgc())
+#link.add(player)
 
 
+run = True
 while run:
     clock.tick(FPS)
     
@@ -104,13 +118,9 @@ while run:
                 player.speedy = 0
             if event.key == pygame.K_DOWN:
                 player.speedy = 0
-            
-    win.fill((255,255,255))
-    win.blit(bg1,bg1_rect)
-    all_sprites.draw(win)                   
-    pygame.display.flip
-    all_sprites.update()    
-            
+    all_sprites.update()        
+    all_sprites.draw(skn)                       
+    pygame.display.flip()
             
 pygame.quit()
 
