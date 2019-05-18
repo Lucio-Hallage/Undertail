@@ -49,10 +49,30 @@ class jogador(pygame.sprite.Sprite):
             self.rect.y=250
         if self.rect.y > HEIGHT-200:
             self.rect.y= HEIGHT-200
-            
-        
-        if not (self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396):
-            print('fase1')
+        print(self.rect.x,self.rect.y)    
+        if self.rect.y<609 and self.rect.x<344 and self.rect.y>249 and self.rect.x>-1:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<=374 and self.rect.x<952 and self.rect.y>274 and self.rect.x>200:
+            self.rect.x+=8
+            self.rect.y-=8
+        if self.rect.y<498 and self.rect.x<952 and self.rect.y>374 and self.rect.x>200:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<579 and self.rect.y>497 and self.rect.x>488:
+            self.rect.x-=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<952 and self.rect.y>497 and self.rect.x>578:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<952 and self.rect.y>497 and self.rect.x>578:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<=530 and self.rect.x<=488 and self.rect.y>=498 and self.rect.x>=344:
+            print('Fase1')
+        if self.rect.y<=610 and self.rect.x<=1340 and self.rect.y>=274 and self.rect.x>=1196:
+            self.rect.x-=8
+            self.rect.y-=8    
     
 class bgc(pygame.sprite.Sprite):
     def __init__(self):
