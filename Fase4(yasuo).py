@@ -94,7 +94,7 @@ class Mob(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        mob_img = pygame.image.load("luchalibre.png").convert()
+        mob_img = pygame.image.load("tornado.jpg").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(mob_img, (24, 24))
@@ -111,8 +111,8 @@ class Mob(pygame.sprite.Sprite):
         self.rect.y = 204
         
         # Sorteia uma velocidade inicial
-        self.speedx = random.randrange(-3, 3)
-        self.speedy = random.randrange(3, 6)
+        self.speedx = 0
+        self.speedy =0
         
         # Melhora a colisão estabelecendo um raio de um circulo
         #self.radius = int(self.rect.width * .85 / 2)
@@ -120,27 +120,99 @@ class Mob(pygame.sprite.Sprite):
         #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
     # Metodo que atualiza a posição da navinha
     def update(self):
-        self.rect.x += self.speedx
+        self.rect.x += self.speedx         
         self.rect.y += self.speedy
-        if self.rect.y>450:
-            self.speedx-=0.1
-        if self.rect.y>400:
-            self.speedx+=0.1
-        if self.rect.y>350:
-            self.speedx-=0.1
-        if self.rect.y>300:
-            self.speedx+=0.1
-        if self.rect.y>250:
-            self.speedx-=0.1
-        if self.rect.y>200:
-            self.speedx+=0.1
+        mx,my = pygame.mouse.get_pos()
+        if mx<self.rect.x:
+            self.speedx-=0.2
+        if mx>self.rect.x:
+            self.speedx+=0.2 
+        if my<self.rect.y:
+            self.speedy-=0.2
+        if my>self.rect.y:
+            self.speedy+=0.2 
         # Se o meteoro passar do final da tela, volta para cima
-        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
+        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
             self.rect.x = random.randrange(84,396)
             self.rect.y = 204
-            self.speedx = random.randrange(-3, 3)
-            self.speedy = random.randrange(3, 6)
-            
+            self.speedx = 0
+            self.speedy = 0
+class tornado(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("tornado.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (50, 335))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(PRETO)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = random.randrange(84,396)
+        # Sorteia um lugar inicial em y
+        self.rect.y = 204
+        
+        # Sorteia uma velocidade inicial
+        
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        
+        self.rect.x+=1
+        
+        # Se o meteoro passar do final da tela, volta para cima
+    
+class tornadoaviso(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("espada.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (50, 280))
+        
+        # Deixando transparente.
+        self.image.set_colorkey((36,36,36))
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = random.randrange(84,396)
+        # Sorteia um lugar inicial em y
+        self.rect.y = 204
+        
+        # Sorteia uma velocidade inicial
+        
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        
+        self.rect.x+=1
+        
 def init_screen(screen):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -257,11 +329,11 @@ try:
         
         #all_sprites.add(player)
         mobs = pygame.sprite.Group()
-        for i in range(10):
+        for i in range(3):
             m = Mob()
             all_sprites.add(m)
             mobs.add(m)
-            
+           
         c = 60
         
         # Loop do jogo
@@ -275,7 +347,19 @@ try:
                 running = False
                 inventario.append('Fase4')
                 gameover=False
-            
+            if c%5==0:
+                m = tornado()
+                all_sprites.add(m)
+                mobs.add(m)
+                
+            if (c-1)%5==0:
+                m = tornadoaviso()
+                all_sprites.add(m)
+                mobs.add(m)
+            if (c-0.5)%5==0:
+                m = tornado()
+                all_sprites.add(m)
+                mobs.add(m)
             for event in pygame.event.get():
                 #check for closing window
                 if event.type == pygame.QUIT:
@@ -292,7 +376,7 @@ try:
             hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
             if hits:
                     running = False
-                    time.sleep(1)
+                    time.sleep(3)
                     
                     
                 
