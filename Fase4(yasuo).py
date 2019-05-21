@@ -175,7 +175,36 @@ class tornado(pygame.sprite.Sprite):
         self.rect.x+=1
         
         # Se o meteoro passar do final da tela, volta para cima
+class Bullet(pygame.sprite.Sprite):
     
+    # Construtor da classe.
+    def __init__(self, x, y):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        bullet_img = pygame.image.load('espada.jpg').convert()
+        self.image = pygame.transform.scale(bullet_img, (50, 75))
+        
+        # Deixando transparente.
+        self.image.set_colorkey((36,36,36))
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.bottom = y
+        self.rect.centerx = x
+        self.speedy = 10
+
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.y += self.speedy
+        
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.y >HEIGHT:
+            self.kill()    
 class tornadoaviso(pygame.sprite.Sprite):
     
     # Construtor da classe.
@@ -323,9 +352,9 @@ try:
         coracao = Coracao()
         all_sprites.add(coracao)
         init_screen(skn)
-        chefe = pygame.sprite.Group()
-        all_sprites.add(Chefe())
-        chefe.add(Chefe())  
+        chefe = Chefe()
+        all_sprites.add(chefe)
+        
         
         #all_sprites.add(player)
         mobs = pygame.sprite.Group()
@@ -334,32 +363,34 @@ try:
             all_sprites.add(m)
             mobs.add(m)
            
-        c = 60
-        
+        c = 3600
+        bullet = Bullet(chefe.rect.x, chefe.rect.y)
+        all_sprites.add(bullet)
+        mobs.add(bullet)
         # Loop do jogo
         
         running = True
         
         while running:
             clock.tick(FPS)
-            c -=1/60
+            c -=1
+            print(c)
             if c <= 0:
                 running = False
                 inventario.append('Fase4')
                 gameover=False
-            if c%5==0:
-                m = tornado()
-                all_sprites.add(m)
-                mobs.add(m)
-                
-            if (c-1)%5==0:
-                m = tornadoaviso()
-                all_sprites.add(m)
-                mobs.add(m)
-            if (c-0.5)%5==0:
-                m = tornado()
-                all_sprites.add(m)
-                mobs.add(m)
+            if (c/60)%5==0:
+                bullet = Bullet(chefe.rect.centerx, chefe.rect.top)
+                all_sprites.add(bullet)
+                mobs.add(bullet)
+            #if (c-1)%5==0:
+             #   m = tornadoaviso()
+              #  all_sprites.add(m)
+               # mobs.add(m)
+            #if (c-0.5)%5==0:
+             #   m = tornado()
+              #  all_sprites.add(m)
+               # mobs.add(m)
             for event in pygame.event.get():
                 #check for closing window
                 if event.type == pygame.QUIT:
@@ -383,7 +414,7 @@ try:
             skn.blit(background, background_rect)
             skn.blit(background1,(72,192))
             text_surface = score_font.render("Sobreviva Por" , True, BRANCO)
-            text_surface2 = score_font.render(" {0} Segundos".format(int(c)), True, BRANCO)
+            text_surface2 = score_font.render(" {0} Segundos".format(int(c/60)), True, BRANCO)
             text_rect = text_surface.get_rect()
             text_rect.midtop = (WIDTH / 2,  10)
             skn.blit(text_surface, text_rect)
@@ -404,6 +435,6 @@ try:
         
         for mobs in all_sprites:
             mobs.kill()
-        t=end_screen(skn,60-c,t,inventario)      
+        t=end_screen(skn,(3600-c)/60,t,inventario)      
 finally:     
         pygame.quit()

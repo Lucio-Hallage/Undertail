@@ -5,7 +5,6 @@ import random
 import time
 pygame.init()
 
-
 FPS=60
 WIDTH=1440
 HEIGHT=810
@@ -69,7 +68,7 @@ class jogador(pygame.sprite.Sprite):
             self.rect.x+=8
             self.rect.y+=8
         if self.rect.y<=530 and self.rect.x<=488 and self.rect.y>=498 and self.rect.x>=344:
-            print('Fase1')
+            from Fase1 import Fase1
         if self.rect.y<=610 and self.rect.x<=1340 and self.rect.y>=274 and self.rect.x>=1196:
             self.rect.x-=8
             self.rect.y-=8    
