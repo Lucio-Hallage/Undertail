@@ -94,13 +94,13 @@ class Mob(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        mob_img = pygame.image.load("luchalibre.png").convert()
+        mob_img = pygame.image.load("teia.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(mob_img, (24, 24))
         
         # Deixando transparente.
-        self.image.set_colorkey(PRETO)
+        self.image.set_colorkey(BRANCO)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()

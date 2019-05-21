@@ -97,6 +97,109 @@ class Mob(pygame.sprite.Sprite):
         mob_img = pygame.image.load("tornado.jpg").convert()
         
         # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (14, 24))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(PRETO)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = random.randrange(84,396)
+        # Sorteia um lugar inicial em y
+        self.rect.y = 204
+        
+        # Sorteia uma velocidade inicial
+        self.speedx = 0
+        self.speedy =0
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        self.radius=10
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.x += self.speedx         
+        self.rect.y += self.speedy
+        mx,my = pygame.mouse.get_pos()
+        if mx<self.rect.x:
+            self.speedx-=0.15  
+        if mx>self.rect.x:
+            self.speedx+=0.15
+        if my<self.rect.y:
+            self.speedy-=0.15
+        if my>self.rect.y:
+            self.speedy+=0.15
+        # Se o meteoro passar do final da tela, volta para cima
+        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
+            self.rect.x = random.randrange(84,396)
+            self.rect.y = 204
+            self.speedx = 0
+            self.speedy = 0
+class Mob1(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("tornado.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (24, 24))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(PRETO)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = 380
+        self.rect.y = random.randrange(204,539)
+        
+        # Sorteia uma velocidade inicial
+        self.speedx = 0
+        self.speedy =0
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        self.radius=10
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.x += self.speedx         
+        self.rect.y += self.speedy
+        mx,my = pygame.mouse.get_pos()
+        if mx<self.rect.x:
+            self.speedx-=0.15
+        if mx>self.rect.x:
+            self.speedx+=0.15
+        if my<self.rect.y:
+            self.speedy-=0.15
+        if my>self.rect.y:
+            self.speedy+=0.15
+        # Se o meteoro passar do final da tela, volta para cima
+        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
+            self.rect.x = 370
+            self.rect.y = random.randrange(204,539)
+            self.speedx = 0
+            self.speedy = 0
+class Mob2(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("tornado.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(mob_img, (24, 24))
         
         # Deixando transparente.
@@ -124,17 +227,17 @@ class Mob(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         mx,my = pygame.mouse.get_pos()
         if mx<self.rect.x:
-            self.speedx-=0.2
+            self.speedx-=0.15
         if mx>self.rect.x:
-            self.speedx+=0.2 
+            self.speedx+=0.15
         if my<self.rect.y:
-            self.speedy-=0.2
+            self.speedy-=0.15
         if my>self.rect.y:
-            self.speedy+=0.2 
+            self.speedy+=0.15
         # Se o meteoro passar do final da tela, volta para cima
         if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
-            self.rect.x = random.randrange(84,396)
-            self.rect.y = 204
+            self.rect.x = 85
+            self.rect.y = random.randrange(204,539)
             self.speedx = 0
             self.speedy = 0
 class tornado(pygame.sprite.Sprite):
@@ -178,14 +281,14 @@ class tornado(pygame.sprite.Sprite):
 class Bullet(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, x, y):
+    def __init__(self, x):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        bullet_img = pygame.image.load('espada.jpg').convert()
-        self.image = pygame.transform.scale(bullet_img, (50, 75))
+        bullet_img = pygame.image.load('espada2.jpg').convert()
+        self.image = pygame.transform.scale(bullet_img, (15,100))
         
         # Deixando transparente.
         self.image.set_colorkey((36,36,36))
@@ -194,7 +297,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Coloca no lugar inicial definido em x, y do constutor
-        self.rect.bottom = y
+        self.rect.y = 204
         self.rect.centerx = x
         self.speedy = 10
 
@@ -203,7 +306,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         
         # Se o tiro passar do inicio da tela, morre.
-        if self.rect.y >HEIGHT:
+        if self.rect.y >539:
             self.kill()    
 class tornadoaviso(pygame.sprite.Sprite):
     
@@ -358,13 +461,18 @@ try:
         
         #all_sprites.add(player)
         mobs = pygame.sprite.Group()
-        for i in range(3):
-            m = Mob()
-            all_sprites.add(m)
-            mobs.add(m)
-           
+        
+        m = Mob()
+        all_sprites.add(m)
+        mobs.add(m)
+        m = Mob1()
+        all_sprites.add(m)
+        mobs.add(m)
+        m = Mob2()
+        all_sprites.add(m)
+        mobs.add(m)
         c = 3600
-        bullet = Bullet(chefe.rect.x, chefe.rect.y)
+        bullet = Bullet(chefe.rect.x)
         all_sprites.add(bullet)
         mobs.add(bullet)
         # Loop do jogo
@@ -374,13 +482,13 @@ try:
         while running:
             clock.tick(FPS)
             c -=1
-            print(c)
+           
             if c <= 0:
                 running = False
                 inventario.append('Fase4')
                 gameover=False
             if (c/60)%5==0:
-                bullet = Bullet(chefe.rect.centerx, chefe.rect.top)
+                bullet = Bullet(chefe.rect.centerx)
                 all_sprites.add(bullet)
                 mobs.add(bullet)
             #if (c-1)%5==0:
@@ -404,7 +512,7 @@ try:
                 coracao.y = my
             
             # Verifica se houve colisão entre nave e meteoro
-            hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
+            hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_rect)
             if hits:
                     running = False
                     time.sleep(3)
