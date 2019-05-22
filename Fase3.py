@@ -361,7 +361,7 @@ try:
             hits = pygame.sprite.groupcollide(mobsi, mobs,True,True)
 
             for hit in hits:
-                boom.play()
+                boom.play(1)
                 m = Mob()
                 minv =MobInvertido()
                 all_sprites.add(m)
@@ -369,10 +369,10 @@ try:
                 all_sprites.add(minv)
                 mobsi.add(minv)
 
-            hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
+            hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
             if hits:
+                boom.play(1)
                 running = False
-                pygame.mixer.music.load('expl6.wav')
                 time.sleep(1)
 
                
