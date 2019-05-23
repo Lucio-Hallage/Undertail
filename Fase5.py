@@ -283,9 +283,10 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     background1 = pygame.image.load('Cursor.png').convert()
-    inicio=pygame.image.load('inicio.png').convert()
-    background2=pygame.transform.scale(inicio, (320, 350))
-    background2.set_colorkey(PRETO)
+    text_surface = score_font.render("FASE 5" , True, PRETO)
+    text_surface2 = score_font.render("GENOS" , True, AZUL)
+    text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
+    text_surface1= pygame.transform.scale(text_surface3, (460, 40))
     running = True
     while running:
         
@@ -300,18 +301,21 @@ def init_screen(screen):
                 sys.exit()
                 running = False
             mx,my = pygame.mouse.get_pos()
-            if not (mx<90 or mx>392 or my<210 or my>560):
+            if not (mx<95 or mx>392 or my<210 or my>560):
                 running=False
                 coracao.x = mx
                 coracao.y = my    
         # A cada loop, redesenha o fundo e os sprites
-        screen.fill(VERMELHO)
+        screen.fill(CINZA)
         screen.blit(background1,(72,192))
-        screen.blit(background2,(80,-20))
+        screen.blit(text_surface,(80,30))
+        screen.blit(text_surface2,(260,70))
+        screen.blit(text_surface1,(10,150))
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
         all_sprites.update()
+
 def end_screen(skn,c,t):
     if c>t:
         t=c
