@@ -373,7 +373,7 @@ try:
             hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
             hits2 = pygame.sprite.spritecollide(coracao, mobsi, False, pygame.sprite.collide_circle)
             if hits1 or hits2:
-                boom.play(1)
+                boom.play()
                 running = False
                 time.sleep(1)
 
