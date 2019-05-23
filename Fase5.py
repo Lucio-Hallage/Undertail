@@ -21,6 +21,7 @@ inventario=[]
 PRETO = (0,0,0)
 AMARELO = (244, 209, 66)
 VERMELHO = (255, 0, 0)
+CINZA = (88,88,88)
 BRANCO=(255,255,255)
 VERDE = (0, 255, 0)
 AZUL=(0,0,255)
@@ -57,18 +58,18 @@ class Chefe(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        chefe_img = pygame.image.load("venom.png").convert()
+        chefe_img = pygame.image.load("genos.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(chefe_img, (105, 130))
         
         # Deixando transparente.
-        self.image.set_colorkey(PRETO)
+        self.image.set_colorkey(BRANCO)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         self.rect.x = 240-52.5
-        self.rect.y = 192-125
+        self.rect.y = 185-125
         self.speedx = 5
         # Metodo que atualiza a posição da navinha
     def update(self):
@@ -94,13 +95,13 @@ class lucha(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        mob_img = pygame.image.load("luchalibre.png").convert()
+        mob_img = pygame.image.load("teia.png").convert()
         
         # Diminuindo o tamanho da imagem.
         self.image = pygame.transform.scale(mob_img, (24, 24))
         
         # Deixando transparente.
-        self.image.set_colorkey(PRETO)
+        self.image.set_colorkey(BRANCO)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -177,7 +178,105 @@ class rings(pygame.sprite.Sprite):
             self.rect.x = random.randrange(84,396)
             self.rect.y = 204
             self.speedx = 0
-            self.speedy = random.randrange(3, 6)            
+            self.speedy = random.randrange(3, 6)    
+class tornado(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("tornado.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (24, 24))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(PRETO)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = 380
+        self.rect.y = random.randrange(204,539)
+        
+        # Sorteia uma velocidade inicial
+        self.speedx = 0
+        self.speedy =0
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        self.radius=10
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.x += self.speedx         
+        self.rect.y += self.speedy
+        mx,my = pygame.mouse.get_pos()
+        if mx<self.rect.x:
+            self.speedx-=0.15
+        if mx>self.rect.x:
+            self.speedx+=0.15
+        if my<self.rect.y:
+            self.speedy-=0.15
+        if my>self.rect.y:
+            self.speedy+=0.15
+        # Se o meteoro passar do final da tela, volta para cima
+        if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
+            self.rect.x = 370
+            self.rect.y = random.randrange(204,539)
+            self.speedx = 0
+            self.speedy = 0
+class mario(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        mob_img = pygame.image.load("bulletmario.jpg").convert()
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(mob_img, (35, 24))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(CINZA)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        
+        # Sorteia um lugar inicial em x
+        self.rect.x = 81
+        # Sorteia um lugar inicial em y
+        self.rect.y = random.randrange(210,560)
+        
+        # Sorteia uma velocidade inicial
+        self.speedx = random.randrange(1,4)
+        self.speedy = 0
+        
+        # Melhora a colisão estabelecendo um raio de um circulo
+        #self.radius = int(self.rect.width * .85 / 2)
+        self.radius=12
+        #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+    # Metodo que atualiza a posição da navinha
+
+    def update(self):
+        self.rect.x += self.speedx
+
+        # Se o meteoro passar do final da tela, volta para cima
+
+        if self.rect.left < 80 or self.rect.right > 396:
+            self.rect.x = 81
+            self.rect.y = random.randrange(210,560)
+            self.speedx = random.randrange(2, 6)
+            self.rect.x += self.speedx
+
 def init_screen(screen):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -290,12 +389,19 @@ try:
         
         #all_sprites.add(player)
         mobs = pygame.sprite.Group()
+        m=tornado()
+        all_sprites.add(m)
+        mobs.add(m)
         for i in range(3):
             m = lucha()
             all_sprites.add(m)
             mobs.add(m)
         for i in range(2):
             m = rings()
+            all_sprites.add(m)
+            mobs.add(m)
+        for i in range(2):
+            m = mario()
             all_sprites.add(m)
             mobs.add(m)
         c = 60

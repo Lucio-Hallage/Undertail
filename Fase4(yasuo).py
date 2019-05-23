@@ -97,7 +97,7 @@ class Mob(pygame.sprite.Sprite):
         mob_img = pygame.image.load("tornado.jpg").convert()
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(mob_img, (14, 24))
+        self.image = pygame.transform.scale(mob_img, (24, 24))
         
         # Deixando transparente.
         self.image.set_colorkey(PRETO)

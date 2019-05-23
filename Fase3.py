@@ -92,17 +92,17 @@ class Mob(pygame.sprite.Sprite):
         mob_img = pygame.image.load("bulletmario.jpg").convert()
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(mob_img, (35, 20))
+        self.image = pygame.transform.scale(mob_img, (35, 24))
         
         # Deixando transparente.
         self.image.set_colorkey(CINZA)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
-        self.rect = self.image.get_rect()
+        
         
         # Sorteia um lugar inicial em x
-        self.rect.x = 120
+        self.rect.x = 81
         # Sorteia um lugar inicial em y
         self.rect.y = random.randrange(210,560)
         
@@ -112,7 +112,7 @@ class Mob(pygame.sprite.Sprite):
         
         # Melhora a colisão estabelecendo um raio de um circulo
         #self.radius = int(self.rect.width * .85 / 2)
-        self.radius=10
+        self.radius=12
         #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
     # Metodo que atualiza a posição da navinha
 
@@ -121,8 +121,8 @@ class Mob(pygame.sprite.Sprite):
 
         # Se o meteoro passar do final da tela, volta para cima
 
-        if self.rect.left < 84 or self.rect.right > 396:
-            self.rect.x = 120
+        if self.rect.left < 80 or self.rect.right > 396:
+            self.rect.x = 81
             self.rect.y = random.randrange(210,560)
             self.speedx = random.randrange(2, 6)
             self.rect.x += self.speedx
@@ -140,7 +140,7 @@ class MobInvertido(pygame.sprite.Sprite):
         mob_img = pygame.image.load("bulletmarioincer.jpg").convert()
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(mob_img, (35, 20))
+        self.image = pygame.transform.scale(mob_img, (35, 24))
         
         # Deixando transparente.
         self.image.set_colorkey(CINZA)
@@ -160,7 +160,7 @@ class MobInvertido(pygame.sprite.Sprite):
         
         # Melhora a colisão estabelecendo um raio de um circulo
         #self.radius = int(self.rect.width * .85 / 2)
-        self.radius=10
+        self.radius=12
         #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
     # Metodo que atualiza a posição da navinha
 
@@ -298,7 +298,7 @@ clock = pygame.time.Clock()
 skn = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.mixer.music.load('mariotheme.wav.wav')
 pygame.mixer.music.set_volume(2)
-boom=pygame.mixer.music.load('expl6.wav') 
+boom=pygame.mixer.Sound('expl6.wav') 
 mariobackground = pygame.image.load('mario.background.png').convert()
 background=pygame.transform.scale(mariobackground, (480, 600))
 background1 = pygame.image.load('Cursor.png').convert()
@@ -307,8 +307,7 @@ score_font=pygame.font.Font("PressStart2P.ttf", 28)
 gameover=True
 t=0
 
-mobs = pygame.sprite.Group()
-mobsi = pygame.sprite.Group()
+
 
 try:
     while 'Fase3' not in inventario:
@@ -320,13 +319,14 @@ try:
         bowser = pygame.sprite.Group()
         all_sprites.add(Bowser())
         bowser.add(Bowser())  
-        
+        mobs = pygame.sprite.Group()
+        mobsi = pygame.sprite.Group()
         #all_sprites.add(player)
         for i in range(3):
             m = Mob()
-            minv =MobInvertido()
             all_sprites.add(m)
             mobs.add(m)
+            minv =MobInvertido()
             all_sprites.add(minv)
             mobsi.add(minv)
             
@@ -361,7 +361,7 @@ try:
             hits = pygame.sprite.groupcollide(mobsi, mobs,True,True)
 
             for hit in hits:
-                boom.play(1)
+                boom.play()
                 m = Mob()
                 minv =MobInvertido()
                 all_sprites.add(m)
@@ -370,7 +370,8 @@ try:
                 mobsi.add(minv)
 
             hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
-            if hits:
+            hits2 = pygame.sprite.spritecollide(coracao, mobsi, False, pygame.sprite.collide_circle)
+            if hits1 or hits2:
                 boom.play(1)
                 running = False
                 time.sleep(1)
