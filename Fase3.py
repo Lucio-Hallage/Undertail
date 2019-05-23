@@ -4,7 +4,7 @@ Created on Tue May 14 22:09:11 2019
 
 @author: insper
 """
-#FASE2-sonic
+#FASE3-bowser
 import pygame,sys
 from pygame.locals import *
 import random
@@ -62,7 +62,7 @@ class Bowser(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         self.rect.x = 240-52.5
-        self.rect.y = 192-125
+        self.rect.y = 200-125
         self.speedx = 2
 
         # Metodo que atualiza a posição da navinha
@@ -245,7 +245,8 @@ def end_screen(skn,c,t,inventario):
     if c>t:
         t=c
     if 'Fase3' not in inventario:
-        text_surface = score_font.render("Você Perdeu" , True, PRETO)
+        
+        text_surface = score_font.render("GAME OVER" , True, PRETO)
         text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
         text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
         text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
