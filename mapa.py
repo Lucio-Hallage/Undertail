@@ -26,10 +26,13 @@ class jogador(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        player_img = pygame.image.load('yasuo1.png').convert()
+        player_img = pygame.image.load('link1.png').convert()
+        #walkRight = [pygame.image.load('link1.png'), pygame.image.load('link2.png'), pygame.image.load('link3.png'), pygame.image.load('link4.png'), pygame.image.load('link5.png'), pygame.image.load('link6.png'), pygame.image.load('link7.png'), pygame.image.load('link8.png')]
+        #walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
+        #char = pygame.image.load('standing.png')
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 138))
+        self.image = pygame.transform.scale(player_img, (35, 50))
         
         # Deixando transparente.
         self.image.set_colorkey((137,164,125))
@@ -42,7 +45,7 @@ class jogador(pygame.sprite.Sprite):
         self.rect.y=HEIGHT-200
         self.speedy =0
         self.speedx =0
-    # Metodo que atualiza a posição da navinha
+    # Metodo que atualiza a posição do link
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
