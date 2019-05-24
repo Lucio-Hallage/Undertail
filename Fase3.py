@@ -303,6 +303,8 @@ def fase3():
     boom=pygame.mixer.Sound('expl6.wav') 
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
+    bg_end = pygame.image.load("gameover.jpg").convert()
+    bg_end = pygame.transform.scale(bg_end, (480, 200))
     background1 = pygame.image.load('Cursor.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)

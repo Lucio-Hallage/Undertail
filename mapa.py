@@ -15,8 +15,7 @@ Tk().wm_withdraw() #to hide the main window
 messagebox.showinfo('Continue','OK')
 def main():
     pygame.init()
-    
-<<<<<<< HEAD
+
     # Construtor da classe.
     def __init__(self):
         
@@ -81,8 +80,7 @@ def main():
         if self.rect.y<=610 and self.rect.x<=1340 and self.rect.y>=274 and self.rect.x>=1196:
             self.rect.x-=8
             self.rect.y-=8    
-=======
->>>>>>> 99c331c3cb32299d1543d6795d1f5b3a548160db
+
     
     FPS=60
     WIDTH=1440
