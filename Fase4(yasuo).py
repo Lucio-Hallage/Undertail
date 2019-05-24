@@ -387,7 +387,7 @@ def end_screen(skn,c,t,inventario):
     if c>t:
         t=c
     if 'Fase4' not in inventario:
-        text_surface = score_font.render("Você Perdeu" , True, PRETO)
+        text_surface = score_font.render("Solado Lixo" , True, PRETO)
         text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
         text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
         text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
