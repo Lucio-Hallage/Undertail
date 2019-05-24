@@ -16,6 +16,73 @@ messagebox.showinfo('Continue','OK')
 def main():
     pygame.init()
     
+<<<<<<< HEAD
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        player_img = pygame.image.load('link1.png').convert()
+        #walkRight = [pygame.image.load('link1.png'), pygame.image.load('link2.png'), pygame.image.load('link3.png'), pygame.image.load('link4.png'), pygame.image.load('link5.png'), pygame.image.load('link6.png'), pygame.image.load('link7.png'), pygame.image.load('link8.png')]
+        #walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
+        #char = pygame.image.load('standing.png')
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(player_img, (35, 50))
+        
+        # Deixando transparente.
+        self.image.set_colorkey((137,164,125))
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.x=0
+        self.rect.y=HEIGHT-200
+        self.speedy =0
+        self.speedx =0
+    # Metodo que atualiza a posição do link
+    def update(self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        if self.rect.x > WIDTH-100:
+            self.rect.x = WIDTH-100
+        if self.rect.x < 0:
+            self.rect.x = 0
+        if self.rect.y < 250:
+            self.rect.y=250
+        if self.rect.y > HEIGHT-200:
+            self.rect.y= HEIGHT-200
+        print(self.rect.x,self.rect.y)    
+        if self.rect.y<609 and self.rect.x<344 and self.rect.y>249 and self.rect.x>-1:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<=374 and self.rect.x<952 and self.rect.y>274 and self.rect.x>200:
+            self.rect.x+=8
+            self.rect.y-=8
+        if self.rect.y<498 and self.rect.x<952 and self.rect.y>374 and self.rect.x>200:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<579 and self.rect.y>497 and self.rect.x>488:
+            self.rect.x-=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<952 and self.rect.y>497 and self.rect.x>578:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<586 and self.rect.x<952 and self.rect.y>497 and self.rect.x>578:
+            self.rect.x+=8
+            self.rect.y+=8
+        if self.rect.y<=410 and self.rect.x<=1192 and self.rect.y>=300 and self.rect.x>=1136:
+            fase2()
+        if self.rect.y<=530 and self.rect.x<=488 and self.rect.y>=498 and self.rect.x>=344:
+            fase1()
+        if self.rect.y<=610 and self.rect.x<=1340 and self.rect.y>=274 and self.rect.x>=1196:
+            self.rect.x-=8
+            self.rect.y-=8    
+=======
+>>>>>>> 99c331c3cb32299d1543d6795d1f5b3a548160db
     
     FPS=60
     WIDTH=1440
