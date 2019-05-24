@@ -284,9 +284,9 @@ def fase5():
     
         # Carrega o fundo da tela inicial
         background1 = pygame.image.load('Cursor.png').convert()
-        text_surface = score_font.render("FASE 5" , True, PRETO)
+        text_surface = score_font.render("FASE 5" , True, BRANCO)
         text_surface2 = score_font.render("GENOS" , True, AZUL)
-        text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, PRETO)
+        text_surface3 = score_font.render("ENTRE NA TELA PRETA" , True, BRANCO)
         text_surface1= pygame.transform.scale(text_surface3, (460, 40))
         running = True
         while running:
@@ -307,7 +307,7 @@ def fase5():
                     coracao.x = mx
                     coracao.y = my    
             # A cada loop, redesenha o fundo e os sprites
-            screen.fill(CINZA)
+            screen.blit(bg_init,background_rect)
             screen.blit(background1,(72,192))
             screen.blit(text_surface,(80,30))
             screen.blit(text_surface2,(260,70))
@@ -373,8 +373,11 @@ def fase5():
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
     pygame.mixer.music.load('cyborgue.mpeg')
     pygame.mixer.music.set_volume(2)
-    background = pygame.image.load('bgtec.jpg').convert()
+    backgroun = pygame.image.load('bgtec.jpg').convert()
+    background = pygame.transform.scale(backgroun, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
+    bg_init = pygame.image.load("genosinit.jpg").convert()
+    bg_init = pygame.transform.scale(bg_init, (480, 650))
     bg_end = pygame.image.load("genos_end.jpg").convert()
     bg_end = pygame.transform.scale(bg_end, (480, 600))
     background_rect = background.get_rect()
@@ -471,3 +474,4 @@ def fase5():
             t=end_screen(skn,60-c,t)      
     finally:     
                pygame.quit()
+fase5()
