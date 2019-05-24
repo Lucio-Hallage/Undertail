@@ -348,7 +348,7 @@ def fase5():
                     running = False
                         
             # A cada loop, redesenha o fundo e os sprites
-            skn.fill(AMARELO)
+            skn.blit(bg_end,background_rect)
             skn.blit(text_surface,(72,192))
             if 'Fase1' not in inventario:
                 skn.blit(text_surface1,(10,252))
@@ -375,7 +375,8 @@ def fase5():
     pygame.mixer.music.set_volume(2)
     background = pygame.image.load('bgtec.jpg').convert()
     background1 = pygame.image.load('Cursor.png').convert()
-    #background2 = pygame.image.load('venom.png').convert()
+    bg_end = pygame.image.load("genos_end.jpg").convert()
+    bg_end = pygame.transform.scale(bg_end, (480, 600))
     background_rect = background.get_rect()
     gameover=True
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -469,4 +470,4 @@ def fase5():
                 mobs.kill()
             t=end_screen(skn,60-c,t)      
     finally:     
-            pygame.quit()
+               pygame.quit()

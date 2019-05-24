@@ -165,7 +165,7 @@ def fase2():
                     coracao.x = mx
                     coracao.y = my    
             # A cada loop, redesenha o fundo e os sprites
-            screen.fill(VERDE)
+            screen.blit(bg_init,background_rect)
             screen.blit(background1,(72,192))
             screen.blit(text_surface,(80,30))
             screen.blit(text_surface2,(260,70))
@@ -176,15 +176,15 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        print(inventario)
+        #laugh.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
-            text_surface = score_font.render("Você Perdeu" , True, PRETO)
-            text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
-            text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
-            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
-            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, PRETO)
+            text_surface = score_font.render("Você Perdeu" , True, VERMELHO)
+            text_surface1 = score_font.render("Pontuação Atual:", True, VERMELHO)
+            text_surface2 = score_font.render("Recorde Atual:", True, VERMELHO)
+            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, VERMELHO)
+            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, VERMELHO)
             
         else:
             text_surface = score_font.render("Você Ganhou" , True, PRETO)
@@ -207,7 +207,7 @@ def fase2():
                     running = False
                         
             # A cada loop, redesenha o fundo e os sprites
-            skn.fill(AMARELO)
+            skn.blit(bg_end,background_rect)
             skn.blit(text_surface,(72,192))
             if 'Fase2' not in inventario:
                 skn.blit(text_surface1,(10,252))
@@ -230,9 +230,14 @@ def fase2():
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
     pygame.mixer.music.load('sonicmusic.mpeg')
     pygame.mixer.music.set_volume(2)
+    #laugh = pygame.mixer.Sound('laugh.wav')
     sonicbg = pygame.image.load('sonicbg.jpg').convert()
-    background=pygame.transform.scale(sonicbg, (480, 600))
+    background = pygame.transform.scale(sonicbg, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
+    bg_end = pygame.image.load("sonicexe.jpg").convert()
+    bg_end = pygame.transform.scale(bg_end, (480, 600))
+    bg_init = pygame.image.load("sonicstart.png").convert()
+    bg_init = pygame.transform.scale(bg_init, (480, 600))
     #background2 = pygame.image.load('venom.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
