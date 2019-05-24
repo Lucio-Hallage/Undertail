@@ -3,6 +3,12 @@ import pygame,sys
 from pygame.locals import *
 import random
 import time
+from os import path
+from Fase1 import fase1
+from Fase2 import fase2
+from Fase3 import fase3
+from Fase4 import fase4
+from Fase5 import fase5
 pygame.init()
 
 FPS=60
@@ -67,8 +73,10 @@ class jogador(pygame.sprite.Sprite):
         if self.rect.y<586 and self.rect.x<952 and self.rect.y>497 and self.rect.x>578:
             self.rect.x+=8
             self.rect.y+=8
+        if self.rect.y<=410 and self.rect.x<=1192 and self.rect.y>=300 and self.rect.x>=1136:
+            fase2()
         if self.rect.y<=530 and self.rect.x<=488 and self.rect.y>=498 and self.rect.x>=344:
-            from Fase1 import Fase1
+            fase1()
         if self.rect.y<=610 and self.rect.x<=1340 and self.rect.y>=274 and self.rect.x>=1196:
             self.rect.x-=8
             self.rect.y-=8    
