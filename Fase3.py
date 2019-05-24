@@ -249,6 +249,7 @@ def fase3():
             t=c
         if 'Fase3' not in inventario:
             
+            gameoversound.play()
             text_surface = score_font.render("GAME OVER" , True, PRETO)
             text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
             text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
@@ -257,6 +258,9 @@ def fase3():
             restart = button("RESTART",150,450,100,50,VERMELHO,PRETO,init_screen) 
             
         else:
+            
+            pygame.mixer.music.pause()
+            winsound.play()
             text_surface = score_font.render("Você Ganhou" , True, PRETO)
         running = True
     
@@ -298,12 +302,12 @@ def fase3():
     pygame.display.set_caption("Undertail")
     clock = pygame.time.Clock()
     
-    
+    winsound = pygame.mixer.Sound('mariowin.wav')
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
     pygame.mixer.music.load('mariotheme.wav.wav')
     pygame.mixer.music.set_volume(2)
     boom=pygame.mixer.Sound('expl6.wav') 
-    #gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
+    gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
     bg_end = pygame.image.load("gameover.jpg").convert()
@@ -409,8 +413,6 @@ def fase3():
     
             for mobs in all_sprites:
                 mobs.kill()
-            gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
-            gameoversound.play()
             t=end_screen(skn,60-c,t,inventario) 
             
         

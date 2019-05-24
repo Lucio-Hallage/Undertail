@@ -176,12 +176,13 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        #laugh.play()
+        pygame.mixer.music.pause()
+        boom.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
-            text_surface = score_font.render("Você Perdeu" , True, VERMELHO)
-            text_surface1 = score_font.render("Pontuação Atual:", True, VERMELHO)
+            text_surface = score_font.render("Você Perdeu" , True, BRANCO)
+            text_surface1 = score_font.render("Pontuação Atual:", True, BRANCO)
             text_surface2 = score_font.render("Recorde Atual:", True, VERMELHO)
             text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, VERMELHO)
             text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, VERMELHO)
@@ -231,7 +232,7 @@ def fase2():
     
     pygame.mixer.music.load('sonicmusic.mpeg')
     pygame.mixer.music.set_volume(2)
-    #boom = pygame.mixer.Sound('sonicmusic.mpeg')
+    boom = pygame.mixer.Sound('sonicgo.wav')
     sonicbg = pygame.image.load('sonicbg.jpg').convert()
     background = pygame.transform.scale(sonicbg, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
@@ -244,10 +245,10 @@ def fase2():
     gameover=True
     t=0
     
-    pygame.mixer.music.play(loops=-1)
+   
     try:
         while 'Fase2' not in inventario:
-            
+            pygame.mixer.music.play(loops=-1)
             all_sprites = pygame.sprite.Group()
             coracao = Coracao()
             all_sprites.add(coracao)
