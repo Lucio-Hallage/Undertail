@@ -545,5 +545,8 @@ def fase4():
             for mobs in all_sprites:
                 mobs.kill()
             t=end_screen(skn,(3600-c)/60,t,inventario)      
-    finally:     
+    finally:
+        if c<=0:
+            return 'Fase4'
+        else:
             pygame.quit()

@@ -407,4 +407,7 @@ def fase3():
             
         
     finally:     
+        if c<=0:
+            return 'Fase3'
+        else:
             pygame.quit()

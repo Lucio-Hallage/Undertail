@@ -176,7 +176,7 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        #laugh.play()
+        laugh.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
@@ -231,7 +231,7 @@ def fase2():
     
     pygame.mixer.music.load('sonicmusic.mpeg')
     pygame.mixer.music.set_volume(2)
-    #boom = pygame.mixer.Sound('sonicmusic.mpeg')
+    laugh = pygame.mixer.Sound('scream.mp3')
     sonicbg = pygame.image.load('sonicbg.jpg').convert()
     background = pygame.transform.scale(sonicbg, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
@@ -323,5 +323,7 @@ def fase2():
                 mobs.kill()
             t=end_screen(skn,40-c,t,inventario)      
     finally:     
+        if c<=0:
+            return 'Fase2'
+        else:
             pygame.quit()
-fase2()
