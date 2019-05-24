@@ -222,15 +222,16 @@ def fase2():
             
             
     # initialize pygame and create window
-    pygame.init()
     pygame.mixer.init()
+    pygame.init()
     pygame.display.set_caption("Undertail")
     clock = pygame.time.Clock()
     
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
+    
     pygame.mixer.music.load('sonicmusic.mpeg')
     pygame.mixer.music.set_volume(2)
-    #laugh = pygame.mixer.Sound('laugh.wav')
+    #boom = pygame.mixer.Sound('sonicmusic.mpeg')
     sonicbg = pygame.image.load('sonicbg.jpg').convert()
     background = pygame.transform.scale(sonicbg, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
@@ -238,11 +239,11 @@ def fase2():
     bg_end = pygame.transform.scale(bg_end, (480, 600))
     bg_init = pygame.image.load("sonicstart.png").convert()
     bg_init = pygame.transform.scale(bg_init, (480, 600))
-    #background2 = pygame.image.load('venom.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
     gameover=True
     t=0
+    
     pygame.mixer.music.play(loops=-1)
     try:
         while 'Fase2' not in inventario:
@@ -323,3 +324,4 @@ def fase2():
             t=end_screen(skn,40-c,t,inventario)      
     finally:     
             pygame.quit()
+fase2()

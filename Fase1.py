@@ -308,3 +308,4 @@ def fase1():
             t=end_screen(skn,60-c,t)      
     finally:     
             pygame.quit()
+            
