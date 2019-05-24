@@ -15,6 +15,8 @@ def fase3():
     WIDTH = 480
     HEIGHT = 600
     FPS = 60
+    #FONT_NAME = 'courier'
+    #HS_FILE = "highscore.txt"
     inventario=[]
     
     #determinar cores
@@ -301,6 +303,7 @@ def fase3():
     pygame.mixer.music.load('mariotheme.wav.wav')
     pygame.mixer.music.set_volume(2)
     boom=pygame.mixer.Sound('expl6.wav') 
+    #gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
     bg_end = pygame.image.load("gameover.jpg").convert()
@@ -337,7 +340,7 @@ def fase3():
             c = 60
             
             # Loop do jogo
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.play()
             running = True
             
             while running:
@@ -376,6 +379,7 @@ def fase3():
                 hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
                 hits2 = pygame.sprite.spritecollide(coracao, mobsi, False, pygame.sprite.collide_circle)
                 if hits1 or hits2:
+                    pygame.mixer.music.pause()
                     boom.play()
                     running = False
                     time.sleep(1)
@@ -405,8 +409,11 @@ def fase3():
     
             for mobs in all_sprites:
                 mobs.kill()
+            gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
+            gameoversound.play()
             t=end_screen(skn,60-c,t,inventario) 
             
         
     finally:     
             pygame.quit()
+fase3()
