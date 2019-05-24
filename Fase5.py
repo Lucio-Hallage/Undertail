@@ -321,7 +321,7 @@ def fase5():
         if c>t:
             t=c
         if 'Fase1' not in inventario:
-            text_surface = score_font.render("Você Perdeu" , True, PRETO)
+            text_surface = score_font.render("GAME OVER" , True, PRETO)
             text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
             text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
             text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
