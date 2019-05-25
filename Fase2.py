@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+  # -*- coding: utf-8 -*-
 """
 Created on Tue May 14 22:09:11 2019
 
@@ -176,17 +176,22 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        laugh.play()
+        boom.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
-            text_surface = score_font.render("Você Perdeu" , True, VERMELHO)
-            text_surface1 = score_font.render("Pontuação Atual:", True, VERMELHO)
+
+            pygame.mixer.music.pause()
+            boom.play()
+            text_surface = score_font.render("Você Perdeu" , True, BRANCO)
+            text_surface1 = score_font.render("Pontuação Atual:", True, BRANCO)
             text_surface2 = score_font.render("Recorde Atual:", True, VERMELHO)
             text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, VERMELHO)
             text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, VERMELHO)
             
         else:
+            pygame.mixer.music.pause()
+            sonicwin.play()
             text_surface = score_font.render("Você Ganhou" , True, PRETO)
         running = True
         while running:
@@ -207,16 +212,24 @@ def fase2():
                     running = False
                         
             # A cada loop, redesenha o fundo e os sprites
-            skn.blit(bg_end,background_rect)
+            
             skn.blit(text_surface,(72,192))
             if 'Fase2' not in inventario:
+                skn.blit(bg_end,background_rect)
                 skn.blit(text_surface1,(10,252))
                 skn.blit(text_surface3,(10,302))
                 skn.blit(text_surface2,(10,362))
                 skn.blit(text_surface4,(10,412))
+
+            else:
+                skn.blit(bg_win,background_rect)
+                skn.blit(text_surface,(10,252))
+
             all_sprites.draw(skn)
             # Depois de desenhar tudo, inverte o display.
             pygame.display.flip()
+
+        
         return t
     
             
@@ -231,7 +244,8 @@ def fase2():
     
     pygame.mixer.music.load('sonicmusic.mpeg')
     pygame.mixer.music.set_volume(2)
-    laugh = pygame.mixer.Sound('scream.mp3')
+    boom = pygame.mixer.Sound('sonicgo.wav')
+    sonicwin = pygame.mixer.Sound('sonicwin.wav')
     sonicbg = pygame.image.load('sonicbg.jpg').convert()
     background = pygame.transform.scale(sonicbg, (480, 600))
     background1 = pygame.image.load('Cursor.png').convert()
@@ -239,15 +253,17 @@ def fase2():
     bg_end = pygame.transform.scale(bg_end, (480, 600))
     bg_init = pygame.image.load("sonicstart.png").convert()
     bg_init = pygame.transform.scale(bg_init, (480, 600))
+    bg_win = pygame.image.load('sonicbg.jpg').convert()
+    bg_win = pygame.transform.scale(bg_win, (240, 300))
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
     gameover=True
     t=0
     
-    pygame.mixer.music.play(loops=-1)
+   
     try:
         while 'Fase2' not in inventario:
-            
+            pygame.mixer.music.play(loops=-1)
             all_sprites = pygame.sprite.Group()
             coracao = Coracao()
             all_sprites.add(coracao)
@@ -263,7 +279,7 @@ def fase2():
                 all_sprites.add(m)
                 mobs.add(m)
                 
-            c = 40
+            c = 10
             
             # Loop do jogo
             

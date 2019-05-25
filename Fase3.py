@@ -15,6 +15,8 @@ def fase3():
     WIDTH = 480
     HEIGHT = 600
     FPS = 60
+    #FONT_NAME = 'courier'
+    #HS_FILE = "highscore.txt"
     inventario=[]
     
     #determinar cores
@@ -247,6 +249,7 @@ def fase3():
             t=c
         if 'Fase3' not in inventario:
             
+            gameoversound.play()
             text_surface = score_font.render("GAME OVER" , True, PRETO)
             text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
             text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
@@ -255,6 +258,9 @@ def fase3():
             restart = button("RESTART",150,450,100,50,VERMELHO,PRETO,init_screen) 
             
         else:
+            
+            pygame.mixer.music.pause()
+            winsound.play()
             text_surface = score_font.render("Você Ganhou" , True, PRETO)
         running = True
     
@@ -296,13 +302,16 @@ def fase3():
     pygame.display.set_caption("Undertail")
     clock = pygame.time.Clock()
     
-    
+    winsound = pygame.mixer.Sound('mariowin.wav')
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
     pygame.mixer.music.load('mariotheme.wav.wav')
     pygame.mixer.music.set_volume(2)
     boom=pygame.mixer.Sound('expl6.wav') 
+    gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
+    bg_end = pygame.image.load("gameover.jpg").convert()
+    bg_end = pygame.transform.scale(bg_end, (480, 200))
     background1 = pygame.image.load('Cursor.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -335,7 +344,7 @@ def fase3():
             c = 60
             
             # Loop do jogo
-            pygame.mixer.music.play(loops=-1)
+            pygame.mixer.music.play()
             running = True
             
             while running:
@@ -374,6 +383,7 @@ def fase3():
                 hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
                 hits2 = pygame.sprite.spritecollide(coracao, mobsi, False, pygame.sprite.collide_circle)
                 if hits1 or hits2:
+                    pygame.mixer.music.pause()
                     boom.play()
                     running = False
                     time.sleep(1)
@@ -411,3 +421,4 @@ def fase3():
             return 'Fase3'
         else:
             pygame.quit()
+

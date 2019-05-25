@@ -58,14 +58,15 @@ class jogador(pygame.sprite.Sprite):
             self.rect.y=56
         if self.rect.y>WIDTH:
             self.rect.y=WIDTH
-        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=440 and self.rect.y>=376:
-            fase2()
         if self.rect.x<=57 and self.rect.x>=-15 and self.rect.y<=440 and self.rect.y>=376 and 'Fase1' not in inventario:
             inventario.append(fase1())
-        if self.rect.x<=57 and self.rect.x>=-15 and self.rect.y<=216 and self.rect.y>=152:
-            fase3()
-        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=216 and self.rect.y>=152:
-            fase4()
+        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=440 and self.rect.y>=376 and 'Fase2' not in inventario:
+            inventario.append(fase2())
+        if self.rect.x<=57 and self.rect.x>=-15 and self.rect.y<=216 and self.rect.y>=152 and 'Fase3' not in inventario:
+            inventario.append(fase3())
+        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=216 and self.rect.y>=152 and 'Fase4' not in inventario:
+            inventario.append(fase4())
+        
         print(self.rect.x,self.rect.y)
      
     
@@ -119,7 +120,7 @@ while run:
     all_sprites.draw(skn)                       
     pygame.display.flip()
             
-pygame.quit()
+pygame.quit() 
 
     
     #ainda sem o background e a skin do char
