@@ -193,6 +193,7 @@ def fase2():
             pygame.mixer.music.pause()
             sonicwin.play()
             text_surface = score_font.render("Você Ganhou" , True, PRETO)
+            
         running = True
         while running:
             
