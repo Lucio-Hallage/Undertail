@@ -474,4 +474,3 @@ def fase5():
             t=end_screen(skn,60-c,t)      
     finally:     
                pygame.quit()
-fase5()

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+  # -*- coding: utf-8 -*-
 """
 Created on Tue May 14 22:09:11 2019
 
@@ -176,7 +176,7 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        
+        boom.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
@@ -254,7 +254,7 @@ def fase2():
     bg_end = pygame.transform.scale(bg_end, (480, 600))
     bg_init = pygame.image.load("sonicstart.png").convert()
     bg_init = pygame.transform.scale(bg_init, (480, 600))
-    bg_win = pygame.image.load('ganhousonic.jpg').convert()
+    bg_win = pygame.image.load('sonicbg.jpg').convert()
     bg_win = pygame.transform.scale(bg_win, (240, 300))
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -340,5 +340,7 @@ def fase2():
                 mobs.kill()
             t=end_screen(skn,40-c,t,inventario)      
     finally:     
+        if c<=0:
+            return 'Fase2'
+        else:
             pygame.quit()
-fase2()

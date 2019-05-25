@@ -306,6 +306,9 @@ def fase1():
             for mobs in all_sprites:
                 mobs.kill()
             t=end_screen(skn,60-c,t)      
-    finally:     
+    finally:
+        if c<=0:
+            return 'Fase1'
+        else:
             pygame.quit()
-            
+ 
