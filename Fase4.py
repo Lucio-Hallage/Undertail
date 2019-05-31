@@ -30,8 +30,7 @@ def fase4():
     class Jogador(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.Surface((50,50))  #TROCAR POR IMAGEM PLAYER
-            #image.fill(AMARELO)
+            self.image = pygame.Surface((50,50))  
             self.rect = self.image.get_rect()
             self.rect.center = (WIDTH/2 , HEIGHT/2)
     
@@ -39,13 +38,11 @@ def fase4():
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
             cor_img = pygame.image.load("coracao.png").convert_alpha()
-            self.image = pygame.transform.scale(cor_img, (12,12))
-            #image.fill(AMARELO)
+            self.image = pygame.transform.scale(cor_img, (12,12))         
             self.rect = self.image.get_rect()
             self.x=0
             self.y=0
             self.radius = 6
-            # pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
         def update(self):
             self.rect.x = self.x-10
             self.rect.y = self.y-10
@@ -64,12 +61,12 @@ def fase4():
             self.image = pygame.transform.scale(chefe_img, (105, 130))
             
             # Deixando transparente.
-            self.image.set_colorkey((137,164,125))
+            self.image.set_colorkey((88,88,88))
             
             # Detalhes sobre o posicionamento.
             self.rect = self.image.get_rect()
             self.rect.x = 240-52.5
-            self.rect.y = 192-125
+            self.rect.y = 192-130
             self.speedx = 5
             # Metodo que atualiza a posição da navinha
         def update(self):
@@ -116,9 +113,9 @@ def fase4():
             self.speedy =0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx         
@@ -167,9 +164,9 @@ def fase4():
             self.speedy =0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx         
@@ -219,9 +216,9 @@ def fase4():
             self.speedy =0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx         
@@ -241,44 +238,6 @@ def fase4():
                 self.rect.y = random.randrange(204,539)
                 self.speedx = 0
                 self.speedy = 0
-    class tornado(pygame.sprite.Sprite):
-        
-        # Construtor da classe.
-        def __init__(self):
-            
-            # Construtor da classe pai (Sprite).
-            pygame.sprite.Sprite.__init__(self)
-            
-            # Carregando a imagem de fundo.
-            mob_img = pygame.image.load("tornado.jpg").convert()
-            
-            # Diminuindo o tamanho da imagem.
-            self.image = pygame.transform.scale(mob_img, (50, 335))
-            
-            # Deixando transparente.
-            self.image.set_colorkey(PRETO)
-            
-            # Detalhes sobre o posicionamento.
-            self.rect = self.image.get_rect()
-            
-            # Sorteia um lugar inicial em x
-            self.rect.x = random.randrange(84,396)
-            # Sorteia um lugar inicial em y
-            self.rect.y = 204
-            
-            # Sorteia uma velocidade inicial
-            
-            
-            # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
-            
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
-        # Metodo que atualiza a posição da navinha
-        def update(self):
-            
-            self.rect.x+=1
-            
-            # Se o meteoro passar do final da tela, volta para cima
     class Bullet(pygame.sprite.Sprite):
         
         # Construtor da classe.
@@ -309,42 +268,7 @@ def fase4():
             # Se o tiro passar do inicio da tela, morre.
             if self.rect.y >539:
                 self.kill()    
-    class tornadoaviso(pygame.sprite.Sprite):
-        
-        # Construtor da classe.
-        def __init__(self):
-            
-            # Construtor da classe pai (Sprite).
-            pygame.sprite.Sprite.__init__(self)
-            
-            # Carregando a imagem de fundo.
-            mob_img = pygame.image.load("espada.jpg").convert()
-            
-            # Diminuindo o tamanho da imagem.
-            self.image = pygame.transform.scale(mob_img, (50, 280))
-            
-            # Deixando transparente.
-            self.image.set_colorkey((36,36,36))
-            
-            # Detalhes sobre o posicionamento.
-            self.rect = self.image.get_rect()
-            
-            # Sorteia um lugar inicial em x
-            self.rect.x = random.randrange(84,396)
-            # Sorteia um lugar inicial em y
-            self.rect.y = 204
-            
-            # Sorteia uma velocidade inicial
-            
-            
-            # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
-            
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
-        # Metodo que atualiza a posição da navinha
-        def update(self):
-            
-            self.rect.x+=1
+    
             
     def init_screen(screen):
         # Variável para o ajuste de velocidade
@@ -428,9 +352,6 @@ def fase4():
         return t
     
             
-            
-    
-    # initialize pygame and create window
     pygame.init()
     pygame.mixer.init()
     pygame.display.set_caption("Undertail")
@@ -444,8 +365,6 @@ def fase4():
     #background2 = pygame.image.load('venom.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
-    gameover=True
-    
     pygame.mixer.music.play(loops=-1)
     t=0
     # Loop do jogo
@@ -472,7 +391,7 @@ def fase4():
             m = Mob2()
             all_sprites.add(m)
             mobs.add(m)
-            c = 900
+            c = 1200
             bullet = Bullet(chefe.rect.x)
             all_sprites.add(bullet)
             mobs.add(bullet)
@@ -487,24 +406,17 @@ def fase4():
                 if c <= 0:
                     running = False
                     inventario.append('Fase4')
-                    gameover=False
+                    
                 if (c/60)%3==0:
                     bullet= Bullet(chefe.rect.centerx)
                     all_sprites.add(bullet)
                     mobs.add(bullet)
-                #if (c-1)%5==0:
-                 #   m = tornadoaviso()
-                  #  all_sprites.add(m)
-                   # mobs.add(m)
-                #if (c-0.5)%5==0:
-                 #   m = tornado()
-                  #  all_sprites.add(m)
-                   # mobs.add(m)
+    
                 for event in pygame.event.get():
-                    #check for closing window
+                    
                     if event.type == pygame.QUIT:
                         running = False
-                        gameover=False
+                        
                 
                 mx,my = pygame.mouse.get_pos()
                 if not (mx<90 or mx>392 or my<210 or my>560):
@@ -530,21 +442,14 @@ def fase4():
                 skn.blit(text_surface2, (70,  50))
                         
                 all_sprites.draw(skn)
-                  #pygame.display.update()
+                  
                 pygame.display.flip()
-                #updates
+                
                 all_sprites.update()
                 
-                
-                #gráficos/desenhos
-              
-                
-                # depois de desenhar tudo
-            #chefe.kill()
-            
             for mobs in all_sprites:
                 mobs.kill()
-            t=end_screen(skn,(900-c)/60,t,inventario)      
+            t=end_screen(skn,(1200-c)/60,t,inventario)      
     finally:
         if c<=0:
             return 'Fase4'

@@ -15,8 +15,6 @@ def fase3():
     WIDTH = 480
     HEIGHT = 600
     FPS = 60
-    #FONT_NAME = 'courier'
-    #HS_FILE = "highscore.txt"
     inventario=[]
     
     #determinar cores
@@ -34,8 +32,7 @@ def fase3():
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
             cor_img = pygame.image.load("coracao.png").convert_alpha()
-            self.image = pygame.transform.scale(cor_img, (12,12))
-    
+            self.image = pygame.transform.scale(cor_img, (12,12))   
             self.rect = self.image.get_rect()
             self.x=0
             self.y=0
@@ -114,10 +111,9 @@ def fase3():
             self.speedy = 0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=12
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
-        # Metodo que atualiza a posição da navinha
+            # Metodo que atualiza a posição da navinha
     
         def update(self):
             self.rect.x += self.speedx
@@ -162,10 +158,9 @@ def fase3():
             self.speedy = 0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=12
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
-        # Metodo que atualiza a posição da navinha
+            # Metodo que atualiza a posição da navinha
     
         def update(self):
             self.rect.x += self.speedx
@@ -176,33 +171,57 @@ def fase3():
                 self.rect.x = 362
                 self.rect.y = random.randrange(210,560)
                 self.speedx = random.randrange(-4, -1)
-                
+
+    # Classe que representa uma explosão de meteoro
+    class Explosion(pygame.sprite.Sprite):
     
-    def text_objects(text, font):
-        textSurface = font.render(text, True, PRETO)
-        return textSurface, textSurface.get_rect()
+        # Construtor da classe.
+        def __init__(self, center, explosion_anim):
+            # Construtor da classe pai (Sprite).
+            pygame.sprite.Sprite.__init__(self)
     
-     #botão
-    def button(msg,x,y,w,h,ic,ac,action=None):
+            # Carrega a animação de explosão
+            self.explosion_anim = explosion_anim
     
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-        print(click)
+            # Inicia o processo de animação colocando a primeira imagem na tela.
+            self.frame = 0
+            self.image = self.explosion_anim[self.frame]
+            self.rect = self.image.get_rect()
+            self.rect.center = center
     
-        if x + y > mouse[0] > x and y + h > mouse[1] > y:
-            pygame.draw.rect(skn, ac, (x,y,w,h))
+            # Guarda o tick da primeira imagem
+            self.last_update = pygame.time.get_ticks()
     
-            if click[0] == 1 and action !=None:
-                action()
+            # Controle de ticks de animação: troca de imagem a cada self.frame_ticks milissegundos.
+            self.frame_ticks = 50
+        
+        def update(self):
+            # Verifica o tick atual.
+            now = pygame.time.get_ticks()
     
-        else:
-            pygame.draw.rect(skn, ic, (x,y,w,h))
+            # Verifica quantos ticks se passaram desde a ultima mudança de frame.
+            elapsed_ticks = now - self.last_update
     
-        smallText = pygame.font.Font("freesansbold.ttf",20)
-        textSurf, textRect = text_objects(msg, smallText)
-        textRect.center = ( (x+(w/2)), (y+(h/2)) )
-        skn.blit(textSurf, textRect)
-                
+            # Se já está na hora de mudar de imagem...
+            if elapsed_ticks > self.frame_ticks:
+    
+                # Marca o tick da nova imagem.
+                self.last_update = now
+    
+                # Avança um quadro.
+                self.frame += 1
+    
+                # Verifica se já chegou no final da animação.
+                if self.frame == len(self.explosion_anim):
+                    # Se sim, tchau explosão!
+                    self.kill()
+                else:
+                    # Se ainda não chegou ao fim da explosão, troca de imagem.
+                    center = self.rect.center
+                    self.image = self.explosion_anim[self.frame]
+                    self.rect = self.image.get_rect()
+                    self.rect.center = center
+                    
     def init_screen(screen):
         # Variável para o ajuste de velocidade
         clock = pygame.time.Clock()
@@ -244,7 +263,6 @@ def fase3():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        print(inventario)
         if c>t:
             t=c
         if 'Fase3' not in inventario:
@@ -255,7 +273,6 @@ def fase3():
             text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
             text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
             text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, PRETO)
-            restart = button("RESTART",150,450,100,50,VERMELHO,PRETO,init_screen) 
             
         else:
             
@@ -295,8 +312,6 @@ def fase3():
         return t
     
             
-            
-    # initialize pygame and create window
     pygame.init()
     pygame.mixer.init()
     pygame.display.set_caption("Undertail")
@@ -307,6 +322,14 @@ def fase3():
     pygame.mixer.music.load('mariotheme.wav.wav')
     pygame.mixer.music.set_volume(2)
     boom=pygame.mixer.Sound('expl6.wav') 
+    explosion_anim = []
+    for i in range(9):
+        filename = 'regularExplosion0{}.png'.format(i)
+        img = pygame.image.load(filename).convert()
+        img = pygame.transform.scale(img, (32, 32))        
+        img.set_colorkey(PRETO)
+        explosion_anim.append(img)
+    print(explosion_anim)    
     gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
@@ -315,7 +338,6 @@ def fase3():
     background1 = pygame.image.load('Cursor.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
-    gameover=True
     t=0
     
     
@@ -332,7 +354,7 @@ def fase3():
             bowser.add(Bowser())  
             mobs = pygame.sprite.Group()
             mobsi = pygame.sprite.Group()
-            #all_sprites.add(player)
+            
             for i in range(3):
                 m = Mob()
                 all_sprites.add(m)
@@ -356,10 +378,10 @@ def fase3():
                     
                 
                 for event in pygame.event.get():
-                    #check for closing window
+                    
                     if event.type == pygame.QUIT:
                         running = False
-                        gameover=False
+                        
                 
                 mx,my = pygame.mouse.get_pos()
                 if not (mx<95 or mx>392 or my<210 or my>560):
@@ -379,6 +401,9 @@ def fase3():
                     mobs.add(m)
                     all_sprites.add(minv)
                     mobsi.add(minv)
+                    # No lugar do meteoro antigo, adiciona uma explosão.
+                    explosao = Explosion(hit.rect.center, explosion_anim)
+                    all_sprites.add(explosao)
     
                 hits1 = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_circle)
                 hits2 = pygame.sprite.spritecollide(coracao, mobsi, False, pygame.sprite.collide_circle)
@@ -400,17 +425,11 @@ def fase3():
                 skn.blit(text_surface2, (70,  50))
                         
                 all_sprites.draw(skn)
-                  #pygame.display.update()
+                  
                 pygame.display.flip()
-                #updates
+                
                 all_sprites.update()
               
-                
-                # depois de desenhar tudo
-            #chefe.kill()
-        
-            
-    
             for mobs in all_sprites:
                 mobs.kill()
             t=end_screen(skn,60-c,t,inventario) 
@@ -422,4 +441,3 @@ def fase3():
         else:
             pygame.quit()
             sys.exit()
-

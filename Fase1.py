@@ -29,8 +29,7 @@ def fase1():
     class Jogador(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.Surface((50,50))  #TROCAR POR IMAGEM PLAYER
-            #image.fill(AMARELO)
+            self.image = pygame.Surface((50,50)) 
             self.rect = self.image.get_rect()
             self.rect.center = (WIDTH/2 , HEIGHT/2)
     
@@ -39,12 +38,12 @@ def fase1():
             pygame.sprite.Sprite.__init__(self)
             cor_img = pygame.image.load("coracao.png").convert_alpha()
             self.image = pygame.transform.scale(cor_img, (12,12))
-            #image.fill(AMARELO)
+            
             self.rect = self.image.get_rect()
             self.x=0
             self.y=0
             self.radius = 6
-            # pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         def update(self):
             self.rect.x = self.x-10
             self.rect.y = self.y-10
@@ -115,9 +114,9 @@ def fase1():
             self.speedy = random.randrange(3, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx
@@ -225,7 +224,6 @@ def fase1():
     venombg=pygame.transform.scale(venombg, (480, 600))
     background = pygame.image.load('Chãolava.png').convert()
     background1 = pygame.image.load('Cursor.png').convert()
-    #background2 = pygame.image.load('venom.png').convert()
     background_rect = background.get_rect()
     gameover=True
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -242,7 +240,6 @@ def fase1():
             all_sprites.add(Chefe())
             chefe.add(Chefe())  
             
-            #all_sprites.add(player)
             mobs = pygame.sprite.Group()
             for i in range(10):
                 m = Mob()
@@ -252,7 +249,7 @@ def fase1():
             c = 60
             
             # Loop do jogo
-            #pygame.mixer.music.play(loops=-1)
+            
             running = True
             
             while running:
@@ -293,17 +290,11 @@ def fase1():
                 skn.blit(text_surface2, (70,  50))
                         
                 all_sprites.draw(skn)
-                  #pygame.display.update()
+                  
                 pygame.display.flip()
-                #updates
+               
                 all_sprites.update()
-                
-                
-                #gráficos/desenhos
-              
-                
-                # depois de desenhar tudo
-            #chefe.kill()
+
             
             for mobs in all_sprites:
                 mobs.kill()

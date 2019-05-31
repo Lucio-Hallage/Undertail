@@ -30,8 +30,7 @@ def fase2():
     class Jogador(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.Surface((50,50))  #TROCAR POR IMAGEM PLAYER
-            #image.fill(AMARELO)
+            self.image = pygame.Surface((50,50))  
             self.rect = self.image.get_rect()
             self.rect.center = (WIDTH/2 , HEIGHT/2)
     
@@ -40,12 +39,10 @@ def fase2():
             pygame.sprite.Sprite.__init__(self)
             cor_img = pygame.image.load("coracao.png").convert_alpha()
             self.image = pygame.transform.scale(cor_img, (12,12))
-            #image.fill(AMARELO)
             self.rect = self.image.get_rect()
             self.x=0
             self.y=0
             self.radius = 6
-            # pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
         def update(self):
             self.rect.x = self.x-10
             self.rect.y = self.y-10
@@ -116,9 +113,8 @@ def fase2():
             self.speedy = random.randrange(3, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx
@@ -234,7 +230,7 @@ def fase2():
     
             
             
-    # initialize pygame and create window
+
     pygame.mixer.init()
     pygame.init()
     pygame.display.set_caption("Undertail")
@@ -257,7 +253,7 @@ def fase2():
     bg_win = pygame.transform.scale(bg_win, (480, 600))
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
-    gameover=True
+    
     t=0
     
    
@@ -271,8 +267,6 @@ def fase2():
             chefe = pygame.sprite.Group()
             all_sprites.add(Chefe())
             chefe.add(Chefe())  
-            
-            #all_sprites.add(player)
             mobs = pygame.sprite.Group()
             for i in range(5):
                 m = Mob()
@@ -294,10 +288,9 @@ def fase2():
                     
                 
                 for event in pygame.event.get():
-                    #check for closing window
+                  
                     if event.type == pygame.QUIT:
                         running = False
-                        gameover=False
                 
                 mx,my = pygame.mouse.get_pos()
                 if not (mx<95 or mx>392 or my<210 or my>560):
@@ -323,18 +316,12 @@ def fase2():
                 skn.blit(text_surface2, (70,  50))
                         
                 all_sprites.draw(skn)
-                  #pygame.display.update()
+                  
                 pygame.display.flip()
-                #updates
+                
                 all_sprites.update()
                 
                 
-                #gráficos/desenhos
-              
-                
-                # depois de desenhar tudo
-            #chefe.kill()
-            
             for mobs in all_sprites:
                 mobs.kill()
             t=end_screen(skn,40-c,t,inventario)      

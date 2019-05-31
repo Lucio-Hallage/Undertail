@@ -31,8 +31,7 @@ def fase5():
     class Jogador(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
-            self.image = pygame.Surface((50,50))  #TROCAR POR IMAGEM PLAYER
-            #image.fill(AMARELO)
+            self.image = pygame.Surface((50,50))
             self.rect = self.image.get_rect()
             self.rect.center = (WIDTH/2 , HEIGHT/2)
     
@@ -41,12 +40,11 @@ def fase5():
             pygame.sprite.Sprite.__init__(self)
             cor_img = pygame.image.load("coracao.png").convert_alpha()
             self.image = pygame.transform.scale(cor_img, (12,12))
-            #image.fill(AMARELO)
             self.rect = self.image.get_rect()
             self.x=0
             self.y=0
             self.radius = 6
-            # pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         def update(self):
             self.rect.x = self.x-10
             self.rect.y = self.y-10
@@ -117,9 +115,9 @@ def fase5():
             self.speedy = random.randrange(5, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+        
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx
@@ -161,9 +159,8 @@ def fase5():
             self.speedy = random.randrange(5, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+           
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx
@@ -209,9 +206,9 @@ def fase5():
             self.speedy =0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
+            
             self.radius=10
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+            
         # Metodo que atualiza a posição da navinha
         def update(self):
             self.rect.x += self.speedx         
@@ -262,9 +259,8 @@ def fase5():
             self.speedy = 0
             
             # Melhora a colisão estabelecendo um raio de um circulo
-            #self.radius = int(self.rect.width * .85 / 2)
             self.radius=12
-            #pygame.draw.circle(self.image,VERMELHO,self.rect.center,self.radius)
+
         # Metodo que atualiza a posição da navinha
     
         def update(self):
@@ -364,7 +360,7 @@ def fase5():
             
             
     
-    # initialize pygame and create window
+   
     pygame.init()
     pygame.mixer.init()
     pygame.display.set_caption("Undertail")
@@ -394,9 +390,6 @@ def fase5():
             init_screen(skn)
             chefe = Chefe()
             all_sprites.add(chefe)
-             
-            
-            #all_sprites.add(player)
             mobs = pygame.sprite.Group()
             m=tornado()
             all_sprites.add(m)
@@ -416,7 +409,7 @@ def fase5():
             c = 12
             
             # Loop do jogo
-            #pygame.mixer.music.play(loops=-1)
+        
             running = True
             
             while running:
@@ -428,7 +421,7 @@ def fase5():
                     gameover=False
                 
                 for event in pygame.event.get():
-                    #check for closing window
+                  
                     if event.type == pygame.QUIT:
                         running = False
                         gameover=False
@@ -457,18 +450,11 @@ def fase5():
                 skn.blit(text_surface2, (70,  50))
                         
                 all_sprites.draw(skn)
-                  #pygame.display.update()
+                  
                 pygame.display.flip()
-                #updates
+              
                 all_sprites.update()
                 
-                
-                #gráficos/desenhos
-              
-                
-                # depois de desenhar tudo
-            #chefe.kill()
-            
             for mobs in all_sprites:
                 mobs.kill()
             t=end_screen(skn,12-c,t)      

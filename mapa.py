@@ -26,12 +26,6 @@ AZUL=(0,0,255)
 skn= pygame.display.set_mode((WIDTH,HEIGHT)) 
 
 
-    
-
-#Tk().wm_withdraw() #to hide the main window
-#messagebox.showinfo('Continue','OK')
-
-
 pygame.init()
 class jogador(pygame.sprite.Sprite):
 
@@ -76,25 +70,37 @@ class jogador(pygame.sprite.Sprite):
             self.speedx=0
             self.speedy=0
             inventario.append(fase1())
-            Tk().wm_withdraw() #to hide the main window
+            pygame.mixer.music.load('pokemonsong.wav')
+            pygame.mixer.music.set_volume(2)
+            pygame.mixer.music.play(loops=-1)
+            Tk().wm_withdraw()#esconde a tela principal
             messagebox.showinfo('Continue','Parabens!!!Você passou a primeira fase. ')
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=500 and self.rect.y>=348 and 'Fase2' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase2())
-            Tk().wm_withdraw() #to hide the main window
+            pygame.mixer.music.load('pokemonsong.wav')
+            pygame.mixer.music.set_volume(2)
+            pygame.mixer.music.play(loops=-1)
+            Tk().wm_withdraw() #esconde a tela principal
             messagebox.showinfo('Continue','Parabens!!!Você passou a segunda fase. ')
         if self.rect.x<=100 and self.rect.x>=20 and self.rect.y<=268 and self.rect.y>=172 and 'Fase3' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase3())
-            Tk().wm_withdraw() #to hide the main window
+            pygame.mixer.music.load('pokemonsong.wav')
+            pygame.mixer.music.set_volume(2)
+            pygame.mixer.music.play(loops=-1)
+            Tk().wm_withdraw() #esconde a tela principal
             messagebox.showinfo('Continue','Parabens!!!Você passou a terceira fase. ')
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=268 and self.rect.y>=172 and 'Fase4' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase4())
-            Tk().wm_withdraw() #to hide the main window
+            pygame.mixer.music.load('pokemonsong.wav')
+            pygame.mixer.music.set_volume(2)
+            pygame.mixer.music.play(loops=-1)
+            Tk().wm_withdraw()#esconde a tela principal
             messagebox.showinfo('Continue','Parabens!!!Você passou a quarta fase. ')
         if 'Fase1' in inventario:
             if 'Fase2' in inventario:
@@ -103,9 +109,7 @@ class jogador(pygame.sprite.Sprite):
                         inventario.append('all')
         if self.rect.y<=0:
             fase5()
-            pygame.quit()
-              
-        
+            pygame.quit()                      
      
 
 pygame.init()
@@ -126,7 +130,12 @@ sonic.set_colorkey((88,88,88))
 venom = pygame.image.load('venom.mapa.png').convert()
 venom = pygame.transform.scale(venom, (100, 138))
 venom.set_colorkey((76,3,112))
-
+yasuo = pygame.image.load("yasuo1.png").convert()
+yasuo = pygame.transform.scale(yasuo, (105, 130))
+yasuo.set_colorkey((88,88,88))
+bowser = pygame.image.load("bowser.pixel.png").convert()
+bowser = pygame.transform.scale(bowser, (90, 115))
+bowser.set_colorkey(PRETO)
 text_surface = score_font.render('Fase 1' , True, VERMELHO)
 text_surface2 = score_font.render('Fase 2', True, VERMELHO)
 text_surface3 = score_font.render('Fase 3', True, VERMELHO)
@@ -138,9 +147,7 @@ text_surface3 = pygame.transform.scale(text_surface3, (120, 80))
 text_surface4 = pygame.transform.scale(text_surface4, (120, 80))
 all_sprites = pygame.sprite.Group()
 player = jogador()
-#link= pygame.sprite.Group()
 all_sprites.add(player)
-#link.add(player)
 pygame.mixer.music.play(loops=-1)
 run = True
 while run:
@@ -183,6 +190,8 @@ while run:
         skn.blit(text_surface5,(300,50))
     skn.blit(sonic,(360,380))
     skn.blit(venom,(40,380))
+    skn.blit(yasuo,(360,150))
+    skn.blit(bowser,(40,170))
     all_sprites.update()        
     all_sprites.draw(skn)                       
     pygame.display.flip()
