@@ -169,14 +169,14 @@ def fase1():
         if c>t:
             t=c
         if 'Fase1' not in inventario:
-            text_surface = score_font.render("Você Perdeu" , True, PRETO)
-            text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
-            text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
-            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
-            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, PRETO)
+            text_surface = score_font.render("Você Perdeu" , True, BRANCO)
+            text_surface1 = score_font.render("Pontuação Atual:", True, BRANCO)
+            text_surface2 = score_font.render("Recorde Atual:", True, BRANCO)
+            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, BRANCO)
+            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, BRANCO)
             
         else:
-            text_surface = score_font.render("Você Ganhou" , True, PRETO)
+            text_surface = score_font.render("Você Ganhou" , True, BRANCO)
         running = True
         while running:
             
@@ -196,7 +196,7 @@ def fase1():
                     running = False
                         
             # A cada loop, redesenha o fundo e os sprites
-            skn.fill(AMARELO)
+            skn.blit(venombg,background_rect)
             skn.blit(text_surface,(72,192))
             if 'Fase1' not in inventario:
                 skn.blit(text_surface1,(10,252))
@@ -221,6 +221,8 @@ def fase1():
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
     pygame.mixer.music.load('megalovania.wav')
     pygame.mixer.music.set_volume(2)
+    venombg = pygame.image.load('venom.bg.jpg').convert()
+    venombg=pygame.transform.scale(venombg, (480, 600))
     background = pygame.image.load('Chãolava.png').convert()
     background1 = pygame.image.load('Cursor.png').convert()
     #background2 = pygame.image.load('venom.png').convert()

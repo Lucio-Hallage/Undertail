@@ -105,7 +105,7 @@ class jogador(pygame.sprite.Sprite):
             fase5()
             pygame.quit()
               
-        print(self.rect.x,self.rect.y)
+        
      
 
 pygame.init()
@@ -113,7 +113,10 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 pygame.mixer.music.load('pokemonsong.wav')
 pygame.mixer.music.set_volume(2)
+bgc = pygame.image.load("chão.png").convert()
+background1 = pygame.transform.scale(bgc, (WIDTH,HEIGHT))
 bg = pygame.image.load("mapa.png").convert()
+bg.set_colorkey(BRANCO)
 background = pygame.transform.scale(bg, (WIDTH,HEIGHT))
 background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -169,6 +172,7 @@ while run:
                 player.speedy = 0
             if event.key == pygame.K_DOWN:
                 player.speedy = 0
+    skn.blit(background1,background_rect)
     skn.blit(background,background_rect)
     skn.blit(text_surface,(13,327))
     skn.blit(text_surface2,(350,328))
@@ -177,8 +181,8 @@ while run:
     if 'all' in inventario:
         skn.blit(text_surface5,(13,50))
         skn.blit(text_surface5,(300,50))
-    skn.blit(sonic,(340,400))
-    skn.blit(venom,(40,400))
+    skn.blit(sonic,(360,380))
+    skn.blit(venom,(40,380))
     all_sprites.update()        
     all_sprites.draw(skn)                       
     pygame.display.flip()
