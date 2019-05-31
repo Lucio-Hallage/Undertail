@@ -78,7 +78,6 @@ class jogador(pygame.sprite.Sprite):
             inventario.append(fase1())
             Tk().wm_withdraw() #to hide the main window
             messagebox.showinfo('Continue','Parabens!!!Você passou a primeira fase. ')
-
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=500 and self.rect.y>=348 and 'Fase2' not in inventario:
             self.speedx=0
             self.speedy=0
@@ -90,7 +89,7 @@ class jogador(pygame.sprite.Sprite):
             self.speedy=0
             inventario.append(fase3())
             Tk().wm_withdraw() #to hide the main window
-            messagebox.showinfo('Continue','Parabens!!!Você passou a teceira fase. ')
+            messagebox.showinfo('Continue','Parabens!!!Você passou a terceira fase. ')
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=268 and self.rect.y>=172 and 'Fase4' not in inventario:
             self.speedx=0
             self.speedy=0
@@ -112,6 +111,8 @@ class jogador(pygame.sprite.Sprite):
 pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
+pygame.mixer.music.load('pokemonsong.wav')
+pygame.mixer.music.set_volume(2)
 bg = pygame.image.load("mapa.png").convert()
 background = pygame.transform.scale(bg, (WIDTH,HEIGHT))
 background_rect = background.get_rect()
@@ -133,7 +134,7 @@ player = jogador()
 #link= pygame.sprite.Group()
 all_sprites.add(player)
 #link.add(player)
-
+pygame.mixer.music.play(loops=-1)
 run = True
 while run:
     clock.tick(FPS)
