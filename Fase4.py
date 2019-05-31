@@ -472,7 +472,7 @@ def fase4():
             m = Mob2()
             all_sprites.add(m)
             mobs.add(m)
-            c = 3600
+            c = 900
             bullet = Bullet(chefe.rect.x)
             all_sprites.add(bullet)
             mobs.add(bullet)
@@ -516,7 +516,7 @@ def fase4():
                 hits = pygame.sprite.spritecollide(coracao, mobs, False, pygame.sprite.collide_rect)
                 if hits:
                         running = False
-                        time.sleep(3)
+                        time.sleep(1)
                         
                         
                     
@@ -544,7 +544,7 @@ def fase4():
             
             for mobs in all_sprites:
                 mobs.kill()
-            t=end_screen(skn,(3600-c)/60,t,inventario)      
+            t=end_screen(skn,(900-c)/60,t,inventario)      
     finally:
         if c<=0:
             return 'Fase4'

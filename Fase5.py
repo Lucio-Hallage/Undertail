@@ -79,10 +79,10 @@ def fase5():
             
             # Se o meteoro passar do final da tela, volta para cima
             if  self.rect.right > 396:
-                    self.speedx=-5
+                    self.speedx=-10
                     
             if self.rect.left < 84:
-                    self.speedx=5
+                    self.speedx=10
                     
                 
                 
@@ -114,7 +114,7 @@ def fase5():
             
             # Sorteia uma velocidade inicial
             self.speedx = random.randrange(-3, 3)
-            self.speedy = random.randrange(3, 6)
+            self.speedy = random.randrange(5, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
             #self.radius = int(self.rect.width * .85 / 2)
@@ -130,7 +130,7 @@ def fase5():
                 self.rect.x = random.randrange(84,396)
                 self.rect.y = 204
                 self.speedx = random.randrange(-3, 3)
-                self.speedy = random.randrange(3, 6)
+                self.speedy = random.randrange(5, 6)
     class rings(pygame.sprite.Sprite):
         
         # Construtor da classe.
@@ -158,7 +158,7 @@ def fase5():
             
             # Sorteia uma velocidade inicial
             self.speedx = random.randrange(-3, 3)
-            self.speedy = random.randrange(3, 6)
+            self.speedy = random.randrange(5, 6)
             
             # Melhora a colisão estabelecendo um raio de um circulo
             #self.radius = int(self.rect.width * .85 / 2)
@@ -170,16 +170,16 @@ def fase5():
             self.rect.y += self.speedy
             mx,my = pygame.mouse.get_pos()
             if mx<self.rect.x:
-                self.speedx-=0.1
+                self.speedx-=0.2
             if mx>self.rect.x:
-                self.speedx+=0.1     
+                self.speedx+=0.2   
                     
             # Se o meteoro passar do final da tela, volta para cima
             if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396:
                 self.rect.x = random.randrange(84,396)
                 self.rect.y = 204
                 self.speedx = 0
-                self.speedy = random.randrange(3, 6)    
+                self.speedy = random.randrange(5, 6)    
     class tornado(pygame.sprite.Sprite):
         
         # Construtor da classe.
@@ -218,13 +218,13 @@ def fase5():
             self.rect.y += self.speedy
             mx,my = pygame.mouse.get_pos()
             if mx<self.rect.x:
-                self.speedx-=0.15
+                self.speedx-=0.2
             if mx>self.rect.x:
-                self.speedx+=0.15
+                self.speedx+=0.2
             if my<self.rect.y:
-                self.speedy-=0.15
+                self.speedy-=0.2
             if my>self.rect.y:
-                self.speedy+=0.15
+                self.speedy+=0.2
             # Se o meteoro passar do final da tela, volta para cima
             if self.rect.top > 564-25 or self.rect.left < 84 or self.rect.right > 396 or self.rect.y<204:
                 self.rect.x = 370
@@ -258,7 +258,7 @@ def fase5():
             self.rect.y = random.randrange(210,560)
             
             # Sorteia uma velocidade inicial
-            self.speedx = random.randrange(1,4)
+            self.speedx = random.randrange(3,6)
             self.speedy = 0
             
             # Melhora a colisão estabelecendo um raio de um circulo
@@ -275,7 +275,7 @@ def fase5():
             if self.rect.left < 80 or self.rect.right > 396:
                 self.rect.x = 81
                 self.rect.y = random.randrange(210,560)
-                self.speedx = random.randrange(2, 6)
+                self.speedx = random.randrange(3, 6)
                 self.rect.x += self.speedx
     
     def init_screen(screen):
@@ -413,7 +413,7 @@ def fase5():
                 m = mario()
                 all_sprites.add(m)
                 mobs.add(m)
-            c = 60
+            c = 12
             
             # Loop do jogo
             #pygame.mixer.music.play(loops=-1)
@@ -471,6 +471,6 @@ def fase5():
             
             for mobs in all_sprites:
                 mobs.kill()
-            t=end_screen(skn,60-c,t)      
+            t=end_screen(skn,12-c,t)      
     finally:     
                pygame.quit()

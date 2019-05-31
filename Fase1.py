@@ -247,7 +247,7 @@ def fase1():
                 all_sprites.add(m)
                 mobs.add(m)
                 
-            c = 10
+            c = 60
             
             # Loop do jogo
             #pygame.mixer.music.play(loops=-1)

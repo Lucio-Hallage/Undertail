@@ -176,7 +176,6 @@ def fase2():
             all_sprites.update()
     
     def end_screen(skn,c,t,inventario):
-        boom.play()
         if c>t:
             t=c
         if 'Fase2' not in inventario:
@@ -254,7 +253,7 @@ def fase2():
     bg_init = pygame.image.load("sonicstart.png").convert()
     bg_init = pygame.transform.scale(bg_init, (480, 600))
     bg_win = pygame.image.load('sonicbg.jpg').convert()
-    bg_win = pygame.transform.scale(bg_win, (240, 300))
+    bg_win = pygame.transform.scale(bg_win, (480, 600))
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
     gameover=True
@@ -279,7 +278,7 @@ def fase2():
                 all_sprites.add(m)
                 mobs.add(m)
                 
-            c = 10
+            c = 40
             
             # Loop do jogo
             

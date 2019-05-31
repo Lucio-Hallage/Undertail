@@ -12,14 +12,19 @@ from Fase5 import fase5
 from tkinter import *
 from tkinter import messagebox
 
-pygame.init()
 
 inventario=[]
 FPS=60
 WIDTH=480
 HEIGHT=600
+PRETO = (0,0,0)
+AMARELO = (244, 209, 66)
+VERMELHO = (255, 0, 0)
+CINZA = (88,88,88)
+BRANCO=(255,255,255)
+VERDE = (0, 255, 0)
+AZUL=(0,0,255)
 skn= pygame.display.set_mode((WIDTH,HEIGHT)) 
-
 
 class jogador(pygame.sprite.Sprite):
     
@@ -30,13 +35,13 @@ class jogador(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        player_img = pygame.image.load('yasuo1.png').convert()
+        player_img = pygame.image.load('link.png').convert()
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 138))
+        self.image = pygame.transform.scale(player_img, (38, 52))
         
         # Deixando transparente.
-        self.image.set_colorkey((137,164,125))
+        self.image.set_colorkey(CINZA)
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -50,35 +55,63 @@ class jogador(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        if self.rect.x<-15:
-            self.rect.x=-15
-        if self.rect.x>384:
-            self.rect.x=384
-        if self.rect.y<56:
-            self.rect.y=56
-        if self.rect.y>WIDTH:
-            self.rect.y=WIDTH
-        if self.rect.x<=57 and self.rect.x>=-15 and self.rect.y<=440 and self.rect.y>=376 and 'Fase1' not in inventario:
+        if 'all' not in inventario:
+             if self.rect.y<96:
+                 self.rect.y=96
+        if self.rect.x<20:
+            self.rect.x=20
+        if self.rect.x>430:
+            self.rect.x=430       
+        if self.rect.y>WIDTH+52:
+            self.rect.y=WIDTH+52
+        if self.rect.x<=100 and self.rect.x>=20 and self.rect.y<=500 and self.rect.y>=348 and 'Fase1' not in inventario:
+            self.speedx=0
+            self.speedy=0
             inventario.append(fase1())
-        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=440 and self.rect.y>=376 and 'Fase2' not in inventario:
+        if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=500 and self.rect.y>=348 and 'Fase2' not in inventario:
+            self.speedx=0
+            self.speedy=0
             inventario.append(fase2())
-        if self.rect.x<=57 and self.rect.x>=-15 and self.rect.y<=216 and self.rect.y>=152 and 'Fase3' not in inventario:
+        if self.rect.x<=100 and self.rect.x>=20 and self.rect.y<=268 and self.rect.y>=172 and 'Fase3' not in inventario:
+            self.speedx=0
+            self.speedy=0
             inventario.append(fase3())
-        if self.rect.x<=384 and self.rect.x>=320 and self.rect.y<=216 and self.rect.y>=152 and 'Fase4' not in inventario:
+        if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=268 and self.rect.y>=172 and 'Fase4' not in inventario:
+            self.speedx=0
+            self.speedy=0
             inventario.append(fase4())
-        
+        if 'Fase1' in inventario:
+            if 'Fase2' in inventario:
+                if 'Fase3' in inventario:
+                    if 'Fase4' in inventario:
+                        inventario.append('all')
+        if self.rect.y<=0:
+            fase5()
+            pygame.quit()
+              
         print(self.rect.x,self.rect.y)
      
-    
-clock = pygame.time.Clock()
 
 pygame.init()
 pygame.mixer.init()
+clock = pygame.time.Clock()
 bg = pygame.image.load("mapa.png").convert()
 background = pygame.transform.scale(bg, (WIDTH,HEIGHT))
 background_rect = background.get_rect()
+score_font=pygame.font.Font("PressStart2P.ttf", 28)
+sonic = pygame.image.load('sonic.png').convert()
+sonic = pygame.transform.scale(sonic, (100, 138))
+sonic.set_colorkey((88,88,88))
+text_surface = score_font.render('Fase 1' , True, VERMELHO)
+text_surface2 = score_font.render('Fase 2', True, VERMELHO)
+text_surface3 = score_font.render('Fase 3', True, VERMELHO)
+text_surface4 = score_font.render('Fase 4', True, VERMELHO)
+text_surface5 = score_font.render('Fase 5', True, CINZA)
+text_surface = pygame.transform.scale(text_surface, (120, 80))
+text_surface2 = pygame.transform.scale(text_surface2, (120, 80))
+text_surface3 = pygame.transform.scale(text_surface3, (120, 80))
+text_surface4 = pygame.transform.scale(text_surface4, (120, 80))
 all_sprites = pygame.sprite.Group()
-
 player = jogador()
 #link= pygame.sprite.Group()
 all_sprites.add(player)
@@ -116,6 +149,14 @@ while run:
             if event.key == pygame.K_DOWN:
                 player.speedy = 0
     skn.blit(background,background_rect)
+    skn.blit(text_surface,(13,327))
+    skn.blit(text_surface2,(350,328))
+    skn.blit(text_surface3,(13,100))
+    skn.blit(text_surface4,(350,100))
+    if 'all' in inventario:
+        skn.blit(text_surface5,(13,50))
+        skn.blit(text_surface5,(300,50))
+    skn.blit(sonic,(340,400))
     all_sprites.update()        
     all_sprites.draw(skn)                       
     pygame.display.flip()
