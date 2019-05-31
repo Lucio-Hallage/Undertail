@@ -488,8 +488,8 @@ def fase4():
                     running = False
                     inventario.append('Fase4')
                     gameover=False
-                if (c/60)%5==0:
-                    bullet = Bullet(chefe.rect.centerx)
+                if (c/60)%3==0:
+                    bullet= Bullet(chefe.rect.centerx)
                     all_sprites.add(bullet)
                     mobs.add(bullet)
                 #if (c-1)%5==0:
@@ -550,3 +550,4 @@ def fase4():
             return 'Fase4'
         else:
             pygame.quit()
+            sys.exit()

@@ -76,18 +76,27 @@ class jogador(pygame.sprite.Sprite):
             self.speedx=0
             self.speedy=0
             inventario.append(fase1())
+            Tk().wm_withdraw() #to hide the main window
+            messagebox.showinfo('Continue','Parabens!!!Você passou a primeira fase. ')
+
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=500 and self.rect.y>=348 and 'Fase2' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase2())
+            Tk().wm_withdraw() #to hide the main window
+            messagebox.showinfo('Continue','Parabens!!!Você passou a segunda fase. ')
         if self.rect.x<=100 and self.rect.x>=20 and self.rect.y<=268 and self.rect.y>=172 and 'Fase3' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase3())
+            Tk().wm_withdraw() #to hide the main window
+            messagebox.showinfo('Continue','Parabens!!!Você passou a teceira fase. ')
         if self.rect.x<=428 and self.rect.x>=356 and self.rect.y<=268 and self.rect.y>=172 and 'Fase4' not in inventario:
             self.speedx=0
             self.speedy=0
             inventario.append(fase4())
+            Tk().wm_withdraw() #to hide the main window
+            messagebox.showinfo('Continue','Parabens!!!Você passou a quarta fase. ')
         if 'Fase1' in inventario:
             if 'Fase2' in inventario:
                 if 'Fase3' in inventario:

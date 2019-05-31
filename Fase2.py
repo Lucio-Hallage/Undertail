@@ -343,3 +343,4 @@ def fase2():
             return 'Fase2'
         else:
             pygame.quit()
+            sys.exit()

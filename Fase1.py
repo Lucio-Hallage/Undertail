@@ -219,7 +219,7 @@ def fase1():
     clock = pygame.time.Clock()
     
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
-    pygame.mixer.music.load('naruto.mpeg')
+    pygame.mixer.music.load('megalovania.wav')
     pygame.mixer.music.set_volume(2)
     background = pygame.image.load('Chãolava.png').convert()
     background1 = pygame.image.load('Cursor.png').convert()
@@ -311,4 +311,5 @@ def fase1():
             return 'Fase1'
         else:
             pygame.quit()
+            sys.exit()
  
