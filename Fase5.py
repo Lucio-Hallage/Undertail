@@ -406,7 +406,7 @@ def fase5():
                 m = mario()
                 all_sprites.add(m)
                 mobs.add(m)
-            c = 12
+            c = 15
             
             # Loop do jogo
         
@@ -457,6 +457,6 @@ def fase5():
                 
             for mobs in all_sprites:
                 mobs.kill()
-            t=end_screen(skn,12-c,t)      
+            t=end_screen(skn,15-c,t)      
     finally:     
-               pygame.quit()
+        pygame.quit()

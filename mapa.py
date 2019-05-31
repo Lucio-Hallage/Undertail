@@ -124,6 +124,9 @@ bg.set_colorkey(BRANCO)
 background = pygame.transform.scale(bg, (WIDTH,HEIGHT))
 background_rect = background.get_rect()
 score_font=pygame.font.Font("PressStart2P.ttf", 28)
+porta = pygame.image.load('porta.jpg').convert()
+porta = pygame.transform.scale(porta, (130,110))
+porta.set_colorkey(BRANCO)
 sonic = pygame.image.load('sonic.png').convert()
 sonic = pygame.transform.scale(sonic, (100, 138))
 sonic.set_colorkey((88,88,88))
@@ -188,6 +191,8 @@ while run:
     if 'all' in inventario:
         skn.blit(text_surface5,(13,50))
         skn.blit(text_surface5,(300,50))
+    else:
+        skn.blit(porta,(175,0))
     skn.blit(sonic,(360,380))
     skn.blit(venom,(40,380))
     skn.blit(yasuo,(360,150))
