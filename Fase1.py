@@ -57,13 +57,13 @@ def fase1():
             pygame.sprite.Sprite.__init__(self)
             
             # Carregando a imagem de fundo.
-            chefe_img = pygame.image.load("venom.png").convert()
+            chefe_img = pygame.image.load("venom.mapa.png").convert()
             
             # Diminuindo o tamanho da imagem.
             self.image = pygame.transform.scale(chefe_img, (105, 130))
             
             # Deixando transparente.
-            self.image.set_colorkey(PRETO)
+            self.image.set_colorkey((76,3,112))
             
             # Detalhes sobre o posicionamento.
             self.rect = self.image.get_rect()
@@ -84,13 +84,13 @@ def fase1():
                     
                 
                 
-    #Classe Mob que representa os meteoros
+    #Classe Mob que representa os mobs
     class Mob(pygame.sprite.Sprite):
         
         # Construtor da classe.
         def __init__(self):
             
-            # Construtor da classe pai (Sprite).
+            # Construtor da classe (Sprite).
             pygame.sprite.Sprite.__init__(self)
             
             # Carregando a imagem de fundo.
