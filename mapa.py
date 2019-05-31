@@ -12,7 +12,6 @@ from Fase5 import fase5
 from tkinter import *
 from tkinter import messagebox
 
-
 inventario=[]
 FPS=60
 WIDTH=480
@@ -26,8 +25,16 @@ VERDE = (0, 255, 0)
 AZUL=(0,0,255)
 skn= pygame.display.set_mode((WIDTH,HEIGHT)) 
 
-class jogador(pygame.sprite.Sprite):
+
     
+
+#Tk().wm_withdraw() #to hide the main window
+#messagebox.showinfo('Continue','OK')
+
+
+pygame.init()
+class jogador(pygame.sprite.Sprite):
+
     # Construtor da classe.
     def __init__(self):
         
@@ -47,14 +54,15 @@ class jogador(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.x=184
-        self.rect.y=WIDTH
+        self.rect.x=240-38/2
+        self.rect.y=600
         self.speedy =0
         self.speedx =0
-    # Metodo que atualiza a posição da navinha
+    # Metodo que atualiza a posição do link
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
+
         if 'all' not in inventario:
              if self.rect.y<96:
                  self.rect.y=96
@@ -117,7 +125,6 @@ player = jogador()
 all_sprites.add(player)
 #link.add(player)
 
-
 run = True
 while run:
     clock.tick(FPS)
@@ -125,7 +132,7 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    
+            pygame.quit()
     # Verifica se apertou alguma tecla.
         if event.type == pygame.KEYDOWN:
                 # Dependendo da tecla, altera a velocidade.
@@ -160,8 +167,6 @@ while run:
     all_sprites.update()        
     all_sprites.draw(skn)                       
     pygame.display.flip()
-            
-pygame.quit() 
 
-    
-    #ainda sem o background e a skin do char
+
+   
