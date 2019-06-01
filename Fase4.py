@@ -358,6 +358,7 @@ def fase4():
     clock = pygame.time.Clock()
     
     skn = pygame.display.set_mode((WIDTH,HEIGHT))
+    yas =pygame.mixer.Sound('sorye.wav')
     pygame.mixer.music.load('naruto2.mpeg')
     pygame.mixer.music.set_volume(2)
     background = pygame.image.load('yasuobg.jpg').convert()
@@ -408,6 +409,7 @@ def fase4():
                     inventario.append('Fase4')
                     
                 if (c/60)%3==0:
+                    yas.play()
                     bullet= Bullet(chefe.rect.centerx)
                     all_sprites.add(bullet)
                     mobs.add(bullet)
