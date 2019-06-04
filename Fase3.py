@@ -265,20 +265,22 @@ def fase3():
     def end_screen(skn,c,t,inventario):
         if c>t:
             t=c
+            telawin = pygame.image.load('winmario.png').convert()
+
         if 'Fase3' not in inventario:
             
             gameoversound.play()
             gobowser = pygame.image.load('gameoverbowser.png').convert()
-            text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
-            text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
-            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
-            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, PRETO)
+            text_surface1 = score_font.render("Pontuação Atual:", True, BRANCO)
+            text_surface2 = score_font.render("Recorde Atual:", True, BRANCO)
+            text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, BRANCO)
+            text_surface4 = score_font.render("{0} segundos".format(int(t)) , True, BRANCO)
             
         else:
             
             pygame.mixer.music.pause()
             winsound.play()
-            gobowser = pygame.image.load('winmario.png').convert()
+            winmario = pygame.image.load('winmario.png').convert()
         running = True
     
         while running:
@@ -302,10 +304,15 @@ def fase3():
             skn.fill(AMARELO)
             skn.blit(text_surface,(72,192))
             if 'Fase3' not in inventario:
+                skn.blit(gobowser, background_rect)
                 skn.blit(text_surface1,(10,252))
                 skn.blit(text_surface3,(10,302))
                 skn.blit(text_surface2,(10,362))
                 skn.blit(text_surface4,(10,412))
+
+            else:
+                skn.blit(winmario,background_rect)
+
             all_sprites.draw(skn)
             # Depois de desenhar tudo, inverte o display.
             pygame.display.flip()
@@ -430,13 +437,14 @@ def fase3():
               
             for mobs in all_sprites:
                 mobs.kill()
-            t=end_screen(skn,60-c,t,inventario) 
+            t=end_screen(skn,60-c,t,inventario)  
             
         
-    finally:     
+    finally:
+            
         if c<=0:
             return 'Fase3'
         else:
             pygame.quit()
             sys.exit()
-fase3()
+
