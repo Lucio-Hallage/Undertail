@@ -268,7 +268,7 @@ def fase3():
         if 'Fase3' not in inventario:
             
             gameoversound.play()
-            text_surface = score_font.render("GAME OVER" , True, PRETO)
+            gobowser = pygame.image.load('gameoverbowser.png').convert()
             text_surface1 = score_font.render("Pontuação Atual:", True, PRETO)
             text_surface2 = score_font.render("Recorde Atual:", True, PRETO)
             text_surface3 = score_font.render("{0} segundos".format(int(c)) , True, PRETO)
@@ -278,7 +278,7 @@ def fase3():
             
             pygame.mixer.music.pause()
             winsound.play()
-            text_surface = score_font.render("Você Ganhou" , True, PRETO)
+            gobowser = pygame.image.load('winmario.png').convert()
         running = True
     
         while running:
@@ -333,8 +333,6 @@ def fase3():
     gameoversound = pygame.mixer.Sound('GAMEOVER.wav')
     mariobackground = pygame.image.load('mario.background.png').convert()
     background=pygame.transform.scale(mariobackground, (480, 600))
-    bg_end = pygame.image.load("gameover.jpg").convert()
-    bg_end = pygame.transform.scale(bg_end, (480, 200))
     background1 = pygame.image.load('Cursor.png').convert()
     background_rect = background.get_rect()
     score_font=pygame.font.Font("PressStart2P.ttf", 28)
@@ -441,3 +439,4 @@ def fase3():
         else:
             pygame.quit()
             sys.exit()
+fase3()
