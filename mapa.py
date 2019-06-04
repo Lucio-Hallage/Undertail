@@ -139,11 +139,6 @@ yasuo.set_colorkey((88,88,88))
 bowser = pygame.image.load("bowser.pixel.png").convert()
 bowser = pygame.transform.scale(bowser, (90, 115))
 bowser.set_colorkey(PRETO)
-text_surface = score_font.render('Fase 1' , True, VERMELHO)
-text_surface2 = score_font.render('Fase 2', True, VERMELHO)
-text_surface3 = score_font.render('Fase 3', True, VERMELHO)
-text_surface4 = score_font.render('Fase 4', True, VERMELHO)
-text_surface5 = score_font.render('Fase 5', True, CINZA)
 text_surface = pygame.transform.scale(text_surface, (120, 80))
 text_surface2 = pygame.transform.scale(text_surface2, (120, 80))
 text_surface3 = pygame.transform.scale(text_surface3, (120, 80))
@@ -161,27 +156,27 @@ while run:
             run = False
             pygame.quit()
     # Verifica se apertou alguma tecla.
-        if event.type == pygame.KEYDOWN:
-                # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                player.speedx = -8
-            if event.key == pygame.K_RIGHT:
-                player.speedx = 8
-            if event.key == pygame.K_UP:
-                player.speedy = -8
-            if event.key == pygame.K_DOWN:
-                player.speedy = 8
-                    # Verifica se apertou alguma tecla.
-        if event.type == pygame.KEYUP:
-                # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                player.speedx = 0
-            if event.key == pygame.K_RIGHT:
-                player.speedx = 0
-            if event.key == pygame.K_UP:
-                player.speedy = 0
-            if event.key == pygame.K_DOWN:
-                player.speedy = 0
+    if event.type == pygame.KEYDOWN:
+            # Dependendo da tecla, altera a velocidade.
+        if event.key == pygame.K_LEFT:
+            player.speedx = -8
+        if event.key == pygame.K_RIGHT:
+            player.speedx = 8
+        if event.key == pygame.K_UP:
+            player.speedy = -8
+        if event.key == pygame.K_DOWN:
+            player.speedy = 8
+                # Verifica se apertou alguma tecla.
+    if event.type == pygame.KEYUP:
+            # Dependendo da tecla, altera a velocidade.
+        if event.key == pygame.K_LEFT:
+            player.speedx = 0
+        if event.key == pygame.K_RIGHT:
+            player.speedx = 0
+        if event.key == pygame.K_UP:
+            player.speedy = 0
+        if event.key == pygame.K_DOWN:
+            player.speedy = 0
     skn.blit(background1,background_rect)
     skn.blit(background,background_rect)
     skn.blit(text_surface,(13,327))

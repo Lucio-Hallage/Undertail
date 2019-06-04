@@ -273,7 +273,7 @@ def fase2():
                 all_sprites.add(m)
                 mobs.add(m)
                 
-            c = 40
+            c = 2
             
             # Loop do jogo
             
@@ -331,3 +331,4 @@ def fase2():
         else:
             pygame.quit()
             sys.exit()
+fase2()

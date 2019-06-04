@@ -458,3 +458,4 @@ def fase4():
         else:
             pygame.quit()
             sys.exit()
+fase4()

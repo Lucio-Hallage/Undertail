@@ -305,4 +305,4 @@ def fase1():
         else:
             pygame.quit()
             sys.exit()
- 
+fase1()
